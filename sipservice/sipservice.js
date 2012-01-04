@@ -131,7 +131,7 @@ winkstart.module('connect', 'sipservice', {
                             alert('Whoops! It appears you have no credit card on file. ' +
                                   'You must have a credit card on file before signing up.\n\n' +
                                   'To enter a credit card:\n' +
-                                  '1) Click on your account name in the upper lefthand corner of Winkstart.\n' +
+                                  '1) Click on your account name in the upper righthand corner of Winkstart.\n' +
                                   '2) Click on the Billing Account tab.\n' +
                                   '3) Fill out your credit card information, then press save.');
                         }
