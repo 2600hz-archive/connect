@@ -520,6 +520,14 @@ winkstart.module('connect', 'numbers', {
                 THIS.search_numbers(npa_data, function(results_data) {
                     var results_html = THIS.templates.add_number_search_results.tmpl(results_data);
 
+                    $('.needCreditAdj', results_html).bind('keyup change blur', function() {
+                        var quantity = $(this).val();
+
+                        quantity = (quantity && quantity >= 0) ? quantity : 0;
+
+                        $(this).siblings('.needCreditItem').dataset('qty', quantity);
+                    });
+
                     $('#foundDIDList', popup_html)
                         .empty()
                         .append(results_html);
