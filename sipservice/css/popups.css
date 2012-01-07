@@ -2,6 +2,10 @@
     color: #424242;
 }
 
+.manage_credits {
+    overflow: hidden;
+}
+
 .add_credits {
     width:600px;
     overflow:hidden;
