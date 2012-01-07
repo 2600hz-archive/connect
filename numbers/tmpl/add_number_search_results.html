@@ -6,27 +6,27 @@
 			<div class="errMsg">${err.msg}</div>
 		{{/each}}
 
-			<div class="rcMsg">{{each(i, car) data}}{{if car.ratecenter}}Rate Center: ${car.ratecenter} {{/if}}&nbsp; {{/each}} &nbsp;</div>
-			<div style="" class="credit_preauth"></div>
-
-			<form id="addDIDForm" onsubmit="addDIDs($('input:checkbox:checked.f_dids')); return false;"  style="overflow: auto; max-width 20em; max-height: 15em;">
-		{{each(i,car) data}}
-		{{each(i,fnbr) car.dids}}
-				<div class="foundDID">
-                    <label for="fd_${fnbr.did}">${fnbr.did}</label>
-                    <input type="checkbox" id="fd_${fnbr.did}" class="f_dids needCreditItem" value="${fnbr.did}" data-recurringCost="${fnbr.rCost}" data-oneTimeCost="${fnbr.oCost}" data-did="${fnbr.did}" data-provider="${fnbr.provider}" data-qty="1" />
-                    {{if fnbr.rc}}
-                        {{if fnbr.rc.npanxx}}
-                            <span class="did_ratecenter">&nbsp;${fnbr.rc.npanxx[0].ratecenter}&nbsp;${fnbr.rc.npanxx[0].state}&nbsp;</span>
-                        {{/if}}
-                    {{/if}}
-
-                    {{if fnbr.did.length != 10}}
-                          <span class="did_ratecenter">QTY:</span><input type="number" data-did="${fnbr.did}" style="margin-left: 5%;" step="1" pattern="^\d*$" name="" class="needCreditAdj shortInt" id="adf_${fnbr.did}_qty" value="1"/>
-                    {{/if}}
+        <div class="rcMsg">{{each(i, car) data}}{{if car.ratecenter}}Rate Center: ${car.ratecenter} {{/if}}&nbsp; {{/each}} &nbsp;</div>
+        <div style="" class="credit_preauth"></div>
+        <form id="addDIDForm" onsubmit="addDIDs($('input:checkbox:checked.f_dids')); return false;">
+            <div class="user_tab">
+                <div class="row">
+                    <div class="first column">Number</div>
+                    <div class="second column">Select</div>
+                    <div class="third column">Rate center</div>
+                    <div class="fourth column">Quantity</div>
                 </div>
-		{{/each}}
-		{{/each}}
-			</form>
+                {{each(i,car) data}}
+                    {{each(i,fnbr) car.dids}}
+                        <div class="row">
+                            <div class="first column">${fnbr.did}</div>
+                            <div class="second column"><input class="select_number f_dids needCreditItem" type="checkbox" id="fd_${fnbr.did}" value="${fnbr.did}" data-recurringCost="${fnbr.rCost}" data-oneTimeCost="${fnbr.oCost}" data-did="${fnbr.did}" data-provider="${fnbr.provider}" data-qty="1"/></div>
+                            <div class="third column">{{if fnbr.rc}}{{if fnbr.rc.npanxx}}<span class="did_ratecenter">&nbsp;${fnbr.rc.npanxx[0].ratecenter}&nbsp;${fnbr.rc.npanxx[0].state}&nbsp;</span>{{/if}}{{/if}}</div>
+                            <div class="fourth column">{{if fnbr.did.length != 10}}<input type="text" data-did="${fnbr.did}" class="needCreditAdj shortInt" id="adf_${fnbr.did}_qty" value="1"/>{{/if}}</div>
+                        </div>
+                    {{/each}}
+                {{/each}}
+            </div>
+        </form>
     </div>
 <div>
