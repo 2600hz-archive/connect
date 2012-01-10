@@ -520,6 +520,11 @@ winkstart.module('connect', 'numbers', {
                 THIS.search_numbers(npa_data, function(results_data) {
                     var results_html = THIS.templates.add_number_search_results.tmpl(results_data);
 
+                    //If there is no did returned by the API.
+                    if(!(results_data.data && results_data.data.ic && results_data.data.ic.dids && results_data.data.ic.dids.length > 0)) {
+                        $('#addDIDForm', results_html).first().hide();
+                    }
+
                     $('.needCreditAdj', results_html).bind('keyup change blur', function() {
                         var quantity = $(this).val();
 
