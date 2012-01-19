@@ -557,7 +557,7 @@ winkstart.module('connect', 'numbers', {
                 });
             });
 
-            popup = winkstart.dialog(popup_html, { title: 'Add number' });
+            popup = winkstart.dialog(popup_html, { title: 'Add number', width: '600px' });
         },
 
         render_e911_dialog: function(number_data, data, callback) {
