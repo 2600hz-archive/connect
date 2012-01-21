@@ -422,8 +422,6 @@ winkstart.module('connect', 'numbers', {
         update_e911: function(e911_data, number_data, data, success, error) {
             var THIS = this;
 
-            console.log(e911_data);
-
             if(typeof success == 'function') {
                 success({});
             }
@@ -591,8 +589,6 @@ winkstart.module('connect', 'numbers', {
             var THIS = this,
                 popup_html = THIS.templates.cnam_dialog.tmpl(number_data.options.caller_id),
                 popup;
-
-            console.log(number_data.options);
 
             $('.submit_btn', popup_html).click(function(ev) {
                 var cnam_data = {

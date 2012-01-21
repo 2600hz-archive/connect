@@ -86,7 +86,7 @@ winkstart.module('connect', 'credits', {
                 err = 0,
                 poll = function(data) {
                     var ret = condition();
-                    console.log(ret);
+
                     if(!ret) {
                         return false;
                     }
