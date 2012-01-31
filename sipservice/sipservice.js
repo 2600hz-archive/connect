@@ -18,17 +18,25 @@ winkstart.module('connect', 'sipservice', {
 
         resources: {
             'trunkstore.create': {
-                url: '{api_url}/ts_accounts',
+                url: '{api_url}/accounts/{account_id}/connectivity',
                 contentType: 'application/json',
                 verb: 'PUT'
             },
-            'trunkstore.get': {
-                url: '{api_url}/ts_accounts/{account_id}',
+
+            'trunkstore.list': {
+                url: '{api_url}/accounts/{account_id}/connectivity',
                 contentType: 'application/json',
                 verb: 'GET'
             },
+
+            'trunkstore.get': {
+                url: '{api_url}/accounts/{account_id}/connectivity/{connectivity_id}',
+                contentType: 'application/json',
+                verb: 'GET'
+            },
+
             'trunkstore.update': {
-                url: '{api_url}/ts_accounts/{account_id}',
+                url: '{api_url}/accounts/{account_id}/connectivity/{connectivity_id}',
                 contentType: 'application/json',
                 verb: 'POST'
             },
@@ -45,17 +53,35 @@ winkstart.module('connect', 'sipservice', {
         create_account: function(success, error) {
             var THIS = this,
                 account_data = {
-                    "account": {
-                        "credits": {
-                            "prepay": "0.00"
+                    account: {
+                        credits: {
+                            prepay: '0.00'
                         },
-                        "auth_realm": winkstart.apps['auth'].realm,
-                        "trunks": "0",
-                        "inbound_trunks" : "0"
+                        trunks: '0',
+                        inbound_trunks: '0'
                     },
-                    "billing_account_id": winkstart.apps['connect'].account_id,
-                    "DIDs_Unassigned": {},
-                    "servers": []
+                    billing_account_id: winkstart.apps['connect'].account_id,
+                    DIDs_Unassigned: {},
+                    servers: [{
+                        server_name: '2600hz Hosted Platform',
+                        DIDs: {},
+                        auth: {},
+                        options: {
+                            enabled: true,
+                            inbound_format: 'e.164',
+                            international: false,
+                            caller_id: {},
+                            e911_info: {},
+                            failover: {}
+                        },
+                        permissions: {
+                            users: []
+                        },
+                        monitor: {
+                            monitor_enabled: false
+                        },
+                        not_editable: true
+                    }]
                 };
 
             winkstart.request(true, 'trunkstore.create', {
@@ -80,6 +106,27 @@ winkstart.module('connect', 'sipservice', {
             var THIS = this;
 
             winkstart.request(true, 'trunkstore.get', {
+                    account_id: winkstart.apps['connect'].account_id,
+                    api_url: winkstart.apps['connect'].api_url,
+                    connectivity_id: winkstart.apps['connect'].connectivity_id
+                },
+                function(data, status) {
+                    if(typeof success == 'function') {
+                        success(data, status);
+                    }
+                },
+                function(data, status) {
+                    if(typeof error == 'function') {
+                        error(data, status);
+                    }
+                }
+            );
+        },
+
+        list_accounts: function(success, error) {
+            var THIS = this;
+
+            winkstart.request(true, 'trunkstore.list', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url
                 },
@@ -124,6 +171,8 @@ winkstart.module('connect', 'sipservice', {
                 ev.preventDefault();
 
                 THIS.create_account(function(_data) {
+                        winkstart.apps['connect'].connectivity_id = _data.data.id;
+
                         THIS.render_trunkstore(_data.data, parent);
                     },
                     function(_data, status) {
@@ -151,16 +200,20 @@ winkstart.module('connect', 'sipservice', {
         activate: function(parent) {
             var THIS = this;
 
-            THIS.get_account(function(data, status) {
-                    /* Hack on first load to get loading... to show up */
-                    if(typeof data.data.account == 'object' && 'credits' in data.data.account) {
-                        delete data.data.account.credits;
-                    }
+            THIS.list_accounts(function(data, status) {
+                    if(data.data.length) {
+                        winkstart.apps['connect'].connectivity_id = data.data[0];
 
-                    THIS.render_trunkstore(data.data, parent);
-                },
-                function(data, status) {
-                    if(status == 404) {
+                        THIS.get_account(function(_data, status) {
+                            /* Hack on first load to get loading... to show up */
+                            if(typeof _data.data.account == 'object' && 'credits' in _data.data.account) {
+                                delete _data.data.account.credits;
+                            }
+
+                            THIS.render_trunkstore(_data.data, parent);
+                        });
+                    }
+                    else {
                         THIS.render_signup(parent);
                     }
                 }

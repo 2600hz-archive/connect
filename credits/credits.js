@@ -15,13 +15,14 @@ winkstart.module('connect', 'credits', {
 
         resources: {
             'credits.update': {
-                url: '{api_url}/ts_accounts/{account_id}/{billing_system}/credits',
+                url: '{api_url}/accounts/{account_id}/{billing_provider}/credits',
                 contentType: 'application/json',
                 verb: 'PUT'
             },
             'credits.get': {
-                url: '{api_url}/ts_accounts/{account_id}/{billing_system}/credits',
+                url: '{api_url}/accounts/{account_id}//{billing_provider}/credits',
                 contentType: 'application/json',
+                trigger_events: false,
                 verb: 'GET'
             }
         }
@@ -40,7 +41,7 @@ winkstart.module('connect', 'credits', {
             winkstart.request(true, 'credits.update', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url,
-                    billing_system: winkstart.apps['connect'].billing_system,
+                    billing_provider: winkstart.apps['connect'].billing_provider,
                     data: {
                         'amount': credits
                     }
@@ -64,7 +65,7 @@ winkstart.module('connect', 'credits', {
             winkstart.request(true, 'credits.get', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url,
-                    billing_system: winkstart.apps['connect'].billing_system
+                    billing_provider: winkstart.apps['connect'].billing_provider
                 },
                 function(data, status) {
                     if(typeof success == 'function') {

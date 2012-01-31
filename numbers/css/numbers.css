@@ -46,24 +46,10 @@
 
 #addDIDForm .column.first {
     width: 100px;
-    text-align:right;
-    padding-right: 25px;
 }
 
 #addDIDForm .column.second {
     width: 70px;
-}
-
-#addDIDForm .column.third {
-    width: 185px;
-}
-
-#addDIDForm .column.third .did_ratecenter{
-    line-height: 25px;
-}
-
-#addDIDForm .column.fourth {
-    padding-left: 15px;
 }
 
 #addDIDForm .row {
@@ -83,5 +69,5 @@
 }
 
 #addDIDForm .row .select_number {
-    margin-left: 27px;
+    margin-top: 5px;
 }

@@ -1,0 +1,41 @@
+<div>
+    <div id="port_number" class="popup container_resize">
+        <div class="resize">
+            <div class="stylized myform">
+                <form id="port" method="post" action="#">
+                    <label>Phone Number</label><input type="text" name="phone_numbers"/><br />
+
+                    <h3>Billing Information (Phone Number Holder)</h3><div class="billing_icon"></div>
+                    <label>Carrier Name</label><input type="text" name="port.service_provider"/><br />
+                    <label>Name on Account</label><input type="text" name="port.billing_name"/><br />
+                    <label>Account Id</label><input type="text" name="port.billing_account_id" /><br />
+                    <label>Address</label><input type="text" name="port.billing_street_address"/><br />
+                    <label>Ext. Address</label><input type="text" name="port.billing_extended_address"/><br />
+                    <label>City</label><input type="text" name="port.billing_locality"/><br />
+                    <label>State</label><input type="text" name="port.billing_region" /><br />
+                    <label>Postal Code</label><input type="text" name="port.billing_postal_code"/>
+
+                    <h3>Porting Documents</h3><div class="billing_icon"></div>
+                    <label>Porting Documents</label><input type="file" name="files" class="files" multiple/><br />
+                    <div class="clear"/>
+                    <label>Number of documents&nbsp;&nbsp;&nbsp;</label><span class="number_of_docs">0</span>
+                    <div class="clear"/>
+                    <p class="note_box">
+                        The cost of porting is $5.<br>
+                        The phone service plan will be terminated when the number will be ported to 2600hz.<br>
+                        The former carrier may charge an early termination fee.<br>
+                        The porting process may take up to 10 days.<br>
+                        During that time, the number will not be usable.<br>
+                        I understand the risks associated with porting number.<br>
+                    </p>
+                    <div class="inline" style="width:250px">
+                        <input name="agreed" type="checkbox"/>
+                        <label style="width:auto;">I agree of Terms of Services</label>
+                    </div>
+                    <div class="clear"/>
+                    <a class="submit_btn ctr" href="#">Port</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

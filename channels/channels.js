@@ -27,6 +27,7 @@ winkstart.module('connect', 'channels', {
             winkstart.request('trunkstore.update', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url,
+                    connectivity_id: winkstart.apps['connect'].connectivity_id,
                     data: new_data
                 },
                 function(_data, status) {

@@ -39,13 +39,12 @@ winkstart.module('connect', 'connect', {
     },
     {
         whapp_vars: {
-            ts_url: 'http://store.2600hz.com/v1',
-            billing_system: 'braintree'
+            billing_provider: 'braintree',
+            e911_provider: 'dash'
         },
 
         modules: {
             'sipservice' : false,
-            'admin' : false,
             'channels' : false,
             'credits' : false,
             'endpoints' : false,

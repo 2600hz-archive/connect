@@ -33,7 +33,7 @@
 #control_area #numbers .buttons li a, #control_area #my_services .buttons li a { display:block; width:157px; height:17px; font-size:11px; color:#dcdcdc; text-decoration:none;  }
 #control_area #numbers .buttons li a:hover, #control_area #my_services .buttons li a:hover { text-decoration:underline; }
 #control_area #numbers .buttons li .add {background:url(../images/button_ca_bottom_plus.png) top left no-repeat; }
-#control_area #numbers .buttons li .import {background:url(../images/button_ca_bottom_import.png) top left no-repeat; }
+#control_area #numbers .buttons li .port {background:url(../images/button_ca_bottom_import.png) top left no-repeat; }
 
 
 /* my services area */
