@@ -112,6 +112,8 @@ winkstart.module('connect', 'sipservice', {
                 },
                 function(data, status) {
                     if(typeof success == 'function') {
+                        data.data.DIDs_Unassigned = data.data.DIDs_Unassigned || {};
+                        data.data.servers = data.data.servers || [];
                         success(data, status);
                     }
                 },
