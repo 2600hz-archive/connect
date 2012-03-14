@@ -20,7 +20,7 @@ winkstart.module('connect', 'credits', {
                 verb: 'PUT'
             },
             'credits.get': {
-                url: '{api_url}/accounts/{account_id}//{billing_provider}/credits',
+                url: '{api_url}/accounts/{account_id}/{billing_provider}/credits',
                 contentType: 'application/json',
                 trigger_events: false,
                 verb: 'GET'
