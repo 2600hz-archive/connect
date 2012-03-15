@@ -17,6 +17,11 @@ winkstart.module('connect', 'sipservice', {
         },
 
         resources: {
+            'baseaccount.get': {
+                url: '{api_url}/accounts/{account_id}',
+                contentType: 'application/json',
+                verb: 'GET'
+            },
             'trunkstore.create': {
                 url: '{api_url}/accounts/{account_id}/connectivity',
                 contentType: 'application/json',
@@ -112,9 +117,9 @@ winkstart.module('connect', 'sipservice', {
                 },
                 function(data, status) {
                     if(typeof success == 'function') {
-                        data.data.DIDs_Unassigned = data.data.DIDs_Unassigned || {};
-                        data.data.servers = data.data.servers || [];
-                        success(data, status);
+                        THIS.check_account_validity(data.data, function(new_data, new_status) {
+                            success(new_data || data, new_status || status);
+                        });
                     }
                 },
                 function(data, status) {
@@ -143,6 +148,83 @@ winkstart.module('connect', 'sipservice', {
                     }
                 }
             );
+        },
+
+        check_account_validity: function(account_data, callback) {
+            var change = false,
+                update_account = function(req_data, success, error) {
+                    winkstart.request(true, 'trunkstore.update', {
+                            account_id: winkstart.apps['connect'].account_id,
+                            api_url: winkstart.apps['connect'].api_url,
+                            connectivity_id: winkstart.apps['connect'].connectivity_id,
+                            data: req_data
+                        },
+                        function(_data, status) {
+                            if(typeof success == 'function') {
+                                success(_data, status);
+                            }
+                        },
+                        function(_data, status) {
+                            if(typeof error == 'function') {
+                                error(_data, status);
+                            }
+                        }
+                    );
+                };
+
+            if(!('DIDs_Unassigned' in account_data)) {
+                account_data.DIDs_Unassigned = {};
+                change = true;
+            }
+            if(!account_data.servers) {
+                account_data.servers = [{
+                    server_name: '2600hz Hosted Platform',
+                    DIDs: {},
+                    auth: {},
+                    options: {
+                        enabled: true,
+                        inbound_format: 'e.164',
+                        international: false,
+                        caller_id: {},
+                        e911_info: {},
+                        failover: {}
+                    },
+                    permissions: {
+                        users: []
+                    },
+                    monitor: {
+                        monitor_enabled: false
+                    },
+                    not_editable: true
+                }];
+                change = true;
+            }
+            if(!('type' in account_data)) {
+                account_data.type = 'sys_info';
+                change = true;
+            }
+
+            if(!change) {
+                callback();
+            }
+            else if(!('auth_realm' in account_data.account)) {
+                winkstart.request('baseaccount.get', {
+                        account_id: winkstart.apps['connect'].account_id,
+                        api_url: winkstart.apps['connect'].api_url
+                    },
+                    function(data, status) {
+                        account_data.account.auth_realm = data.data.realm;
+                        update_account(account_data, function(_data, status) {
+                            callback(_data, status);
+                        });
+                    }
+                );
+            }
+            else {
+                update_account(account_data, function(_data, status) {
+                    callback(_data, status);
+                });
+            }
         },
 
         render_trunkstore: function(data, _parent) {
