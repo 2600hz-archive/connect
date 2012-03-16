@@ -11,6 +11,7 @@ winkstart.module('connect', 'numbers', {
             failover_dialog: 'tmpl/failover_dialog.html',
             cnam_dialog: 'tmpl/cnam_dialog.html',
             e911_dialog: 'tmpl/e911_dialog.html',
+            basic_add_number_dialog: 'tmpl/basic_add_number_dialog.html',
             add_number_dialog: 'tmpl/add_number_dialog.html',
             add_number_search_results: 'tmpl/add_number_search_results.html'
         },
@@ -138,7 +139,7 @@ winkstart.module('connect', 'numbers', {
             winkstart.request(true, 'number.delete', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url,
-                    phone_number: data.phone_number
+                    phone_number: encodeURIComponent(data.phone_number)
                 },
                 function(data, status) {
                     if(typeof success == 'function') {
@@ -180,7 +181,7 @@ winkstart.module('connect', 'numbers', {
             winkstart.request(true, 'number.get', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url,
-                    phone_number: data.phone_number
+                    phone_number: encodeURIComponent(data.phone_number)
                 },
                 function(_data, status) {
                     if(typeof success == 'function') {
@@ -201,7 +202,7 @@ winkstart.module('connect', 'numbers', {
             winkstart.request('number.update', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url,
-                    phone_number: data.phone_number,
+                    phone_number: encodeURIComponent(data.phone_number),
                     data: data.options || {}
                 },
                 function(_data, status) {
@@ -223,7 +224,7 @@ winkstart.module('connect', 'numbers', {
             winkstart.request('number.create', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url,
-                    phone_number: data.phone_number,
+                    phone_number: encodeURIComponent(data.phone_number),
                     data: data.options || {}
                 },
                 function(_data, status) {
@@ -245,7 +246,7 @@ winkstart.module('connect', 'numbers', {
             winkstart.request(true, 'number.activate', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url,
-                    phone_number: data.phone_number,
+                    phone_number: encodeURIComponent(data.phone_number),
                     data: data.options || {}
                 },
                 function(_data, status) {
@@ -267,7 +268,7 @@ winkstart.module('connect', 'numbers', {
             winkstart.request('number_doc.create', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url,
-                    phone_number: data.phone_number,
+                    phone_number: encodeURIComponent(data.phone_number),
                     file_name: data.file_name,
                     data: data.file_data
                 },
@@ -592,6 +593,30 @@ winkstart.module('connect', 'numbers', {
             });
         },
 
+        render_basic_add_number_dialog: function(callback) {
+            var THIS = this,
+                number_data = {},
+                popup_html = THIS.templates.basic_add_number_dialog.tmpl(),
+                popup;
+
+            $('#add_number_btn', popup_html).click(function(ev) {
+                ev.preventDefault();
+
+                number_data.phone_number = $('#phone_number', popup_html).val();
+
+                popup.dialog('close');
+            });
+
+            popup = winkstart.dialog(popup_html, {
+                title: 'Add number',
+                onClose: function() {
+                    if(typeof callback == 'function') {
+                        callback(number_data);
+                    }
+                }
+            });
+        },
+
         render_add_number_dialog: function(callback) {
             var THIS = this,
                 numbers_data = [],
@@ -866,11 +891,28 @@ winkstart.module('connect', 'numbers', {
             $('.numbers.add', numbers_html).click(function(ev) {
                 ev.preventDefault();
 
-                THIS.render_add_number_dialog(function(numbers_data) {
-                    THIS.add_numbers(numbers_data, data, function(_data) {
-                        winkstart.publish('trunkstore.refresh', _data.data);
+                if(winkstart.apps['connect'].admin) {
+                    THIS.render_basic_add_number_dialog(function(number_data) {
+                        THIS.create_number(number_data, function(_data) {
+                            number_data.data = _data.data;
+
+                            THIS.activate_number(number_data, function(_data) {
+                                data.DIDs_Unassigned[number_data.phone_number] = _data.data;
+
+                                THIS.update_trunkstore(data, function(_data) {
+                                    winkstart.publish('trunkstore.refresh', _data.data);
+                                });
+                            });
+                        });
                     });
-                });
+                }
+                else {
+                    THIS.render_add_number_dialog(function(numbers_data) {
+                        THIS.add_numbers(numbers_data, data, function(_data) {
+                            winkstart.publish('trunkstore.refresh', _data.data);
+                        });
+                    });
+                }
             });
 
             $('.numbers.port', numbers_html).click(function(ev) {

@@ -68,7 +68,7 @@ winkstart.module('connect', 'sipservice', {
                     billing_account_id: winkstart.apps['connect'].account_id,
                     DIDs_Unassigned: {},
                     servers: [{
-                        server_name: '2600hz Hosted Platform',
+                        server_name: 'Hosted Platform',
                         DIDs: {},
                         auth: {},
                         options: {
@@ -178,7 +178,7 @@ winkstart.module('connect', 'sipservice', {
             }
             if(!account_data.servers) {
                 account_data.servers = [{
-                    server_name: '2600hz Hosted Platform',
+                    server_name: '2600hz Platform',
                     DIDs: {},
                     auth: {},
                     options: {
