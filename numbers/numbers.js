@@ -610,7 +610,7 @@ winkstart.module('connect', 'numbers', {
             popup = winkstart.dialog(popup_html, {
                 title: 'Add number',
                 onClose: function() {
-                    if(typeof callback == 'function') {
+                    if(typeof callback == 'function' && number_data.phone_number) {
                         callback(number_data);
                     }
                 }
