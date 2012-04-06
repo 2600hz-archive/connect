@@ -34,7 +34,7 @@ winkstart.module('connect', 'connect', {
         THIS.config_whapp();
 
         THIS.whapp_auth(function() {
-            winkstart.publish('appnav.add', { 'name' : THIS.__module });
+            winkstart.publish('whappnav.add', { 'name' : THIS.__module });
         });
     },
     {
