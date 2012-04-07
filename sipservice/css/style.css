@@ -29,7 +29,7 @@
 #control_area #numbers .view .showing { color:#4e4d4d; float:left; margin:6px 0 0 25px; }
 
 #control_area #numbers .buttons, #control_area #my_services .buttons { height:22px; margin:0 0 0 15px; clear: both; }
-#control_area #numbers .buttons li, #control_area #my_services .buttons li { width:187px; height:22px; background:url(../images/button_controlarea_bottom.jpg) top left no-repeat; float:left; margin:0 0 0 6px; list-style: none; }
+#control_area #numbers .buttons li, #control_area #my_services .buttons li { width:187px; height:22px; line-height: 22px; background:url(../images/button_controlarea_bottom.jpg) top left no-repeat; float:left; margin:0 0 0 6px; list-style: none; }
 #control_area #numbers .buttons li a, #control_area #my_services .buttons li a { display:block; width:157px; height:17px; font-size:11px; color:#dcdcdc; text-decoration:none;  }
 #control_area #numbers .buttons li a:hover, #control_area #my_services .buttons li a:hover { text-decoration:underline; }
 #control_area #numbers .buttons li .add {background:url(../images/button_ca_bottom_plus.png) top left no-repeat; }

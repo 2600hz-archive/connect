@@ -43,6 +43,20 @@
 
                     <div class="clear"/>
 
+                    <h3>Media Handling</h3>
+                    <div class="clear"/>
+                    <label for="compatibility_mode">Compatibility mode</label>
+                    <select id="compatibility_mode" name="options.media_handling">
+                    {{if options.media_handling === 'process'}}
+                        <option value="process" selected="selected">Enabled</option>
+                        <option value="bypass">Disabled</option>
+                    {{else}}
+                        <option value="process">Enabled</option>
+                        <option value="bypass" selected="selected">Disabled</option>
+                    {{/if}}
+                    </select>
+                    <div class="clear"/>
+
                     <div class="btn_wrapper">
                         <a href="#" class="endpoint edit submit_btn ctr">Submit</a><br>
                     </div>
