@@ -2,7 +2,7 @@
     <div id="edit_server" class="popup container_resize">
         <div class="resize">
             <div class="stylized myform">
-                <form id="endpoint" action="#">
+                <form id="endpoint" style="margin: 15px 20px 0px 20px;">
                     <input type="hidden" name="serverid" value="${serverid}" />
                     <label>Server Nickname</label><input type="text" name="server_name" value="${server_name}" class="field_last" />
 
@@ -12,7 +12,7 @@
 
                     <div class="clear"/>
 
-                    <p>Your switch or PBX will connect to our service using a username and password:</p>
+                    <p>Your switch or PBX will connect to our service <br/>using a username and password:</p>
                     <label>Register To</label><input type="text" disabled="true" name="realm" value="${realm}" />
                     <input type="hidden" name="auth.auth_method" value="Password" />
                     <label>Username</label><input type="text" name="auth.auth_user" value="${auth.auth_user}"/>
@@ -37,14 +37,13 @@
 
                     <div class="clear"/>
 
-                    <h3>Service Limits</h3><div class="icon limit"></div>
+                    <h3>Custom settings</h3><div class="icon limit"></div>
+                    <div class="clear"/>
+
                     <label>Channel Limit</label>
-                    <input id="max_trunks" type="text" name="options.max_trunks" value="${options.max_trunks}" />
-
+                    <input id="max_trunks" type="text" name="options.max_trunks" value="${options.max_trunks}"/>
                     <div class="clear"/>
 
-                    <h3>Media Handling</h3>
-                    <div class="clear"/>
                     <label for="compatibility_mode">Compatibility mode</label>
                     <select id="compatibility_mode" name="options.media_handling">
                     {{if options.media_handling === 'process'}}
@@ -58,7 +57,7 @@
                     <div class="clear"/>
 
                     <div class="btn_wrapper">
-                        <a href="#" class="endpoint edit submit_btn ctr">Submit</a><br>
+                        <button class="endpoint edit fancy_button blue">Submit</button>
                     </div>
                 </form>
             </div>
