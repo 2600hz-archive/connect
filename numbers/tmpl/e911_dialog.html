@@ -1,12 +1,11 @@
 <div>
-    <div class="popup edit_e911">
-        <div class="stylized myform">
+    <div class="trunkstore_popup e911">
+        <div>
             {{if phone_number}}
                 <h3>E911 Service Location for ${phone_number}</h3>
             {{else}}
                 <h3>Default E911 Service Location</h3>
             {{/if}}
-            <div class="icon emergency blue"></div>
             <form id="e911" action="#">
                 <p class="clear">Address to display on 911 operator console:<p>
 
@@ -40,9 +39,9 @@
                         &nbsp;&nbsp;<a href="http://maps.google.com/maps?q=${latitude},+${longitude}+(Your+E911+Location)&iwloc=A&hl=en" target="_blank">Google Maps</a>
                     </div>
                 {{/if}}
-                <div class="clear"/>
-
-                <a class="submit_btn clear ctr" style="margin-top:20px;" href="#">Submit</a>
+                <div class="buttons_centered">
+                    <a class="fancy_button blue" href="#">Submit</a>
+                </div>
             </form>
         </div>
     </div>

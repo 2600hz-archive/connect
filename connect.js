@@ -1,4 +1,8 @@
 winkstart.module('connect', 'connect', {
+        css: [
+            'css/trunkstore_popups.css'
+        ],
+
         subscribe: {
             'connect.activate' : 'activate',
             'connect.initialized' : 'initialized',

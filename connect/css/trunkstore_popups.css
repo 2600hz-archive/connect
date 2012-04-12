@@ -1,0 +1,74 @@
+.trunkstore_popup {
+	padding: 15px;
+}
+
+.trunkstore_popup input[type="text"]{
+	font-size: 12px;
+	padding: 2px;
+	border: solid 1px #09F;
+	width: 200px;
+	border-radius: 5px;
+}
+
+.trunkstore_popup h3 {
+	font-size: 14.5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.trunkstore_popup p {
+	margin: 20px 0 20px 0;
+	text-align: center;
+}
+
+.trunkstore_popup p.note_box {
+	background-color: #E7E7E7;
+    padding: 15px 10px;
+    font-size: 12px;
+    line-height:15px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    border: 2px solid #A6A6A6;
+    text-align: center;
+}
+
+.trunkstore_popup .buttons_centered {
+	width: auto;
+    padding: 15px 15px 0 15px;
+    text-align: center;
+}
+
+/* FAILOVER POPUP */
+
+.failover label {
+	font-weight: bold;
+}
+
+.failover form{
+	margin-bottom: 0;
+}
+
+/* e911 POPUP */
+.e911 form > div:not(:last-child) {
+	margin: 20px 0 20px 0;
+}
+
+.e911 form{
+	margin-bottom: 0;
+}
+
+/* CNAM POPUP */
+.cnam form{
+	margin-bottom: 0;
+}
+
+/*ADDNUMBER POPUP*/
+
+.add_number input[type="checkbox"]{
+	margin: 7px 0 0 15px;
+}
+
+.add_number .helpertext{
+	text-align: center;
+}
+

@@ -1,7 +1,7 @@
 <div>
-    <div id="edit_number" class="popup container_resize">
-        <div class="resize">
-            <div class="stylized myform">
+    <div id="edit_number" class="trunkstore_popup add_number">
+        <div>
+            <div>
                 <p class="note_box">
                     You can specify the area code and up to 3 numbers of the local prefix.
                     For Toll Free number please enter 800, 888, 877, 866, 855 in the area code.<br /><br />
@@ -10,30 +10,27 @@
 
                 <form id="sdidform" action="" onsubmit="return false;">
                     <div id="sdiddiv">
-                        <span id="ACspan">(</span><input type="text" id="sdid_npa" name="NPA" maxlength="3" pattern="^[2-9][0-8][0-9]$" />&nbsp;
-                        <span id="COCspan">) -</span><input type="text" id="sdid_nxx"  name="NXX" maxlength="3" pattern="^[2-9]\d\d$" />&nbsp;
-                        <span id="help_did_add_dids" class="help_bt">&nbsp;</span>
+                        <span id="ACspan">( </span>
+                        <input type="text" id="sdid_npa" name="NPA" maxlength="3" pattern="^[2-9][0-8][0-9]$" /> 
+                        <span id="COCspan"> ) - </span><input type="text" id="sdid_nxx"  name="NXX" maxlength="3" pattern="^[2-9]\d\d$" /> 
+                        <span id="help_did_add_dids" class="help_bt"> </span>
                     </div>
                 </form>
 
-                <a id="search_numbers_button" class="ctr_btn clear" href="#">Search</a>
+                <div class="buttons_centered">
+                    <a id="search_numbers_button" class="fancy_button blue" href="#">Search</a>
+                </div>
             </div>
                 <div id="foundDIDList"/>
 
-            <div class="stylized myform">
+            <div>
                 <div class="search_icon"/>
-
-                <br /><br />
-
                 <div class="table1"/>
-
-                <br />
-
                 <div class="table2"/>
-
                 <p class="note_box">Each number you select will be added to your monthly invoice.</p>
-
-                <a id="add_numbers_button" class="ctr_btn" href="#">Add</a>
+                <div class="buttons_centered">
+                    <a id="add_numbers_button" class="fancy_button blue" href="#">Add</a>
+                </div>
                 <div class="helpertext">Clicking the "Add Button" will charge your credit card</div>
             </div>
         </div>
