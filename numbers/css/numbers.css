@@ -71,3 +71,9 @@
 #addDIDForm .row .select_number {
     margin-top: 5px;
 }
+
+#number_list {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
