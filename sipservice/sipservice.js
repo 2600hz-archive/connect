@@ -232,7 +232,15 @@ winkstart.module('connect', 'sipservice', {
                 parent = _parent || $('#ws-content'),
                 trunkstore_html = THIS.templates.main.tmpl();
 
-            THIS.templates.main_services.tmpl().appendTo($('#my_services', trunkstore_html));
+            var services_html = THIS.templates.main_services.tmpl().appendTo($('#my_services', trunkstore_html));
+
+            $('.manage', services_html).click(function(ev) {
+                ev.preventDefault();
+
+                THIS.get_account(function(_data, status) {
+                    winkstart.publish('credits.render_dialog', _data.data, trunkstore_html);
+                });
+            });
 
             winkstart.publish('credits.render', data, trunkstore_html);
             winkstart.publish('channels.render', data, trunkstore_html);

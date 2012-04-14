@@ -5,11 +5,13 @@ winkstart.module('connect', 'credits', {
 
         templates: {
             credits: 'tmpl/credits.html',
-            credits_dialog: 'tmpl/credits_dialog.html'
+            credits_dialog: 'tmpl/credits_popup.html'
+            //credits_dialog: 'tmpl/credits_dialog.html'
         },
 
         subscribe: {
             'credits.render': 'render_credits',
+            'credits.render_dialog': 'render_credits_dialog',
             'trunkstore.rendered': 'after_trunkstore_render'
         },
 
@@ -115,48 +117,64 @@ winkstart.module('connect', 'credits', {
             poll();
         },
 
-        render_credits_dialog: function(data, callback) {
-            var THIS = this,
-                popup_html = THIS.templates.credits_dialog.tmpl(data),
-                popup;
+        render_credits_dialog: function(data, parent, callback) {
+            var THIS = this;
 
-            $('.credits.add', popup_html).click(function(ev) {
-                ev.preventDefault();
+            THIS.get_credits(function(_data, status) {
+                /* Update of the prepay value from braintree */
+                data.account.credits.prepay = _data.data.amount;
 
-                THIS.add_credits($('input[type="radio"]:checked', popup_html).val(), function(_data) {
-                    popup.dialog('close');
+                var popup_html = THIS.templates.credits_dialog.tmpl(data),
+                    popup;
 
-                    if(typeof callback == 'function') {
-                        callback(_data);
-                    }
+                $('ul.settings1', popup_html).tabs($('.pane > div', popup_html));
+
+                $('.purchase_credits', popup_html).click(function(ev) {
+                    ev.preventDefault();
+                    var credits_to_add = parseFloat($('#add_credits', popup_html).val().replace(',','.'));
+
+                    THIS.add_credits(credits_to_add, function() {
+                        THIS.get_credits(function(_data) {
+                            $('.current_balance', popup_html).empty()
+                                                             .text(_data.data.amount);
+
+                            $('.amount', parent).empty().html('$'+_data.data.amount);
+
+                            if(typeof callback === 'function') {
+                                callback(_data);
+                            }
+                        });
+                    });
                 });
-            });
 
-            popup = winkstart.dialog(popup_html, { title: 'Add Credits' });
+                $('.submit_channels', popup_html).click(function(ev) {
+                    ev.preventDefault();
+
+                    var channels_data = {
+                        trunks: $('#outbound_calls', popup_html).val(),
+                        inbound_trunks: $('#inbound_calls', popup_html).val()
+                    };
+
+                    winkstart.publish('channels.update', channels_data, data, function(_data) {
+                        popup.dialog('close');
+
+                        $('.inbound_trunks', parent).html(_data.data.account.inbound_trunks);
+                        $('.outbound_trunks', parent).html(_data.data.account.trunks);
+
+                        if(typeof callback == 'function') {
+                            callback(_data);
+                        }
+                    });
+                });
+
+                popup = winkstart.dialog(popup_html, { title: 'Add Credits' });
+            });
         },
 
         render_credits: function(data, parent) {
             var THIS = this,
                 target = $('#credits', parent),
                 credits_html = THIS.templates.credits.tmpl(data);
-
-            $('#add_prepay_button', credits_html).click(function(ev) {
-                ev.preventDefault();
-
-                THIS.render_credits_dialog(data, function() {
-                    THIS.get_credits(function(_data) {
-                        $.extend(true, data, {
-                            account: {
-                                credits: {
-                                    prepay: _data.data.amount
-                                }
-                            }
-                        });
-
-                        THIS.render_credits(data, parent);
-                    });
-                });
-            });
 
             (target)
                 .empty()

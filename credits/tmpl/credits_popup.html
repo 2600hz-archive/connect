@@ -1,0 +1,93 @@
+<div>
+    <div class="manage_credits trunkstore_popup">
+        <div>
+            <form id="credits_form" name="credits">
+
+                <ul class="settings_tabs settings1">
+                    <li><a href="javascript:void(0);">Flat-Rate Calling</a></li>
+                    <li><a href="javascript:void(0);">Per-Minute Calling</a></li>
+                </ul>
+
+                <div class="clear"></div>
+
+                <div class="pane">
+                    <div id="flat_rate">
+                        <span>Flat-Rate calling allows you to pay a monthly, predictable fee that never changes, regardless of your usage.
+
+                        <h2>Flat-Rate Outbound Calling</h2>
+                        <div class="trunk_line">
+                            <div class="left">I want to allow up to <input type="text" id="outbound_calls" size="2" value="${account.trunks}"/></div>
+                            <div class="right">simultaneous outbound calls at $29.99/month per line</div>
+                            <div class="clear"/>
+                        </div>
+
+                        <!--
+                        {{if internatinal}}
+                            <input type="checkbox" name="international_call" CHECKED="CHECKED">
+                        {{else}}
+                            <input type="checkbox" name="international_call">
+                        {{/if}}
+                        I want flat-rate calling to 18 countries for $8/month more, per line
+                        -->
+
+                        <h2>Flat-Rate Inbound Calling</h2>
+                        <div class="trunk_line">
+                            <div class="left">I want to allow up to <input type="text" id="inbound_calls" size="2" value="${account.inbound_trunks}"/></div>
+                            <div class="right">simultaneous inbound calls to the US-48 at $6.99/month per line</div>
+                            <div class="clear"/>
+                        </div>
+                        <div class="note">NOTE: If you don't want flat-rate, your account will default to pay-per-minute</div>
+
+                        <div class="buttons_centered">
+                            <button class="fancy_button blue submit_channels">Submit</button>
+                        </div>
+                    </div>
+
+                    <div id="per_minute">
+                        <span>Pay-per-minute allows you to pay only for what you use. Deposit money into your account to get started, then pay-as-you-go for usage.</span>
+                        <div class="current_balance_wrapper">
+                            Your Current Balance: $<span class="current_balance">${account.credits.prepay}</span>
+                        </div>
+                        <div class="add_credits_wrapper">
+                            I would like to add <input id="add_credits" type="text" size="4"/> $ to my current balance
+                            <button class="fancy_button blue purchase_credits">Purchase</button>
+                        </div>
+
+                        <!--
+                        {{if min_threshold}}
+                        <input type="checkbox" name="enable_min_threshold" CHECKED="CHECKED"/>
+                        {{else}}
+                        <input type="checkbox" name="enable_min_threshold"/>
+                        {{/if}}
+                        If my account drops below <input type="text" name="min_threshold">${min_threshold}</input> automatically add another
+                        <select name="automatic_refill">
+                            <option value="5">$5.00</option>
+                            <option value="10">$10.00</option>
+                            <option value="20">$20.00</option>
+                            <option value="50">$50.00</option>
+                            <option value="100">$100.00</option>
+                            <option value="500">$500.00</option>
+                        </select>
+
+                        <h2>Fraud Protection</h2>
+                        {{if max_threshold}}
+                        <input type="checkbox" name="enable_max_threshold" CHECKED="CHECKED"/>
+                        {{else}}
+                        <input type="checkbox" name="enable_max_threshold"/>
+                        {{/if}}
+                        Don't add more than <input type="text" name="max_threshold">${max_threshold}</input> per day
+
+                        NOTE: Pay-per-minute is used only when you have no more flat-rate trunks available, or when you are calling international
+                        -->
+                    </div>
+                </div>
+                <!--
+                <div class="buttons_centered">
+                    <button class="fancy_button blue done_credit">Done!</button>
+                </div>
+                -->
+            </form>
+        </div>
+    </div>
+</div>
+

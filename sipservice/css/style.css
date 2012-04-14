@@ -34,6 +34,7 @@
 #control_area #numbers .buttons li a:hover, #control_area #my_services .buttons li a:hover { text-decoration:underline; }
 #control_area #numbers .buttons li .add {background:url(../images/button_ca_bottom_plus.png) top left no-repeat; }
 #control_area #numbers .buttons li .port {background:url(../images/button_ca_bottom_import.png) top left no-repeat; }
+#control_area #my_services .buttons li .manage {background:url(../images/button_ca_bottom_import.png) top left no-repeat; }
 
 
 /* my services area */

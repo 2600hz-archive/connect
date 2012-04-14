@@ -1,3 +1,62 @@
 #credit_form .dollar {
     margin-bottom: 10px;
 }
+
+.manage_credits {
+    width: 500px;
+    background-color: #555;
+    cursor: default;
+}
+
+.manage_credits #credits_form {
+    margin: 15px 0px 0px 0px;
+}
+
+.manage_credits .pane {
+    width: 420px;
+    color: #333;
+    background-color: #eee;
+    margin-bottom: 15px;
+}
+
+.manage_credits .pane .buttons_centered {
+    padding-bottom: 0px;
+}
+
+.manage_credits .current_balance_wrapper {
+    margin: 20px 0 20px 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.manage_credits .current_balance_wrapper button {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.manage_credits .trunk_line {
+    padding-bottom: 10px;
+}
+
+.manage_credits .trunk_line .right {
+    float: left;
+    max-width: 250px;
+    margin-left: 5px;
+    line-height: 24px;
+}
+
+.manage_credits .trunk_line .left {
+    float: left;
+    line-height: 24px;
+}
+
+.manage_credits .note {
+    margin-top: 15px;
+    font-size: 12px;
+}
+
+.manage_credits #inbound_calls, .manage_credits #outbound_calls, .manage_credits #add_credits {
+    width: 30px;
+}
+

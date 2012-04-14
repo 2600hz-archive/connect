@@ -7,7 +7,11 @@ winkstart.module('connect', 'connect', {
             'connect.activate' : 'activate',
             'connect.initialized' : 'initialized',
             'connect.module_activate': 'module_activate'
-        }
+        },
+
+        css: [
+            'css/trunkstore_popups.css'
+        ]
     },
     /* The code in this initialization function is required for
      * loading routine.

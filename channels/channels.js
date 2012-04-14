@@ -5,7 +5,8 @@ winkstart.module('connect', 'channels', {
         },
 
         subscribe: {
-            'channels.render': 'render_channels'
+            'channels.render': 'render_channels',
+            'channels.update': 'update_channels'
         }
     },
 
@@ -47,6 +48,8 @@ winkstart.module('connect', 'channels', {
             var THIS = this,
                 popup_html = THIS.templates.channels_dialog.tmpl($.extend({}, data, { rates: THIS.rates })),
                 popup;
+
+            console.log(data);
 
             $('#trunks, #inbound_trunks', popup_html).bind('keyup change', function() {
                 var id = $(this).attr('id');
