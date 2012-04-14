@@ -450,7 +450,6 @@ winkstart.module('connect', 'numbers', {
                 var _cnam_data = $.extend(true, {}, data.data.cnam, { phone_number: number_data.phone_number });
 
                 THIS.render_cnam_dialog(_cnam_data, function(cnam_data) {
-                    console.log(cnam_data);
                     if(!$.isEmptyObject(cnam_data)) {
                         if(cnam_data.display_name == '') {
                             delete cnam_data.display_name;
