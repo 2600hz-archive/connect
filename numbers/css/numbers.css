@@ -77,3 +77,37 @@
     overflow-y: auto;
     overflow-x: hidden;
 }
+
+/* FAILOVER POPUP */
+
+.failover label {
+    font-weight: bold;
+}
+
+.failover form{
+    margin-bottom: 0;
+}
+
+/* e911 POPUP */
+.e911 form > div:not(:last-child) {
+    margin: 20px 0 20px 0;
+}
+
+.e911 form{
+    margin-bottom: 0;
+}
+
+/* CNAM POPUP */
+.cnam form{
+    margin-bottom: 0;
+}
+
+/*ADDNUMBER POPUP*/
+
+.add_number input[type="checkbox"]{
+    margin: 7px 0 0 15px;
+}
+
+.add_number .helpertext{
+    text-align: center;
+}
