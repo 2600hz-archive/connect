@@ -7,7 +7,8 @@ winkstart.module('connect', 'numbers', {
             numbers: 'tmpl/numbers.html',
             number: 'tmpl/number.html',
             endpoint_number: 'tmpl/endpoint_number.html',
-            port_dialog: 'tmpl/port_dialog.html',
+            //port_dialog: 'tmpl/port_dialog.html',
+            port_dialog: 'tmpl/port_popup.html',
             failover_dialog: 'tmpl/failover_dialog.html',
             cnam_dialog: 'tmpl/cnam_dialog.html',
             e911_dialog: 'tmpl/e911_dialog.html',
@@ -519,7 +520,39 @@ winkstart.module('connect', 'numbers', {
                 }),
                 popup,
                 files,
-                phone_numbers;
+                phone_numbers,
+                current_step = 1,
+                max_steps = 4,
+                $prev_step = $('.prev_step', popup_html),
+                $next_step = $('.next_step', popup_html),
+                $submit_btn = $('.submit_btn', popup_html);
+
+            $('.step_div:not(.first)', popup_html).hide();
+            $prev_step.hide();
+            $submit_btn.hide();
+
+            $('.prev_step', popup_html).click(function() {
+                $next_step.show();
+                $submit_btn.hide();
+                $('.step_div', popup_html).hide();
+                $('.step_div:nth-child(' + --current_step + ')', popup_html).show();
+                $('.wizard_nav .steps_text li, .wizard_nav .steps_image .round_circle').removeClass('current');
+                $('#step_title_'+current_step +', .wizard_nav .steps_image .round_circle:nth-child('+ current_step +')', popup_html).addClass('current');
+
+                current_step === 1 ? $('.prev_step', popup_html).hide() : true;
+            });
+
+            $('.next_step', popup_html).click(function() {
+                $prev_step.show();
+                $('.step_div', popup_html).hide();
+                $('.step_div:nth-child(' + ++current_step + ')', popup_html).show();
+                $('.wizard_nav .steps_text li, .wizard_nav .steps_image .round_circle').removeClass('current');
+                $('#step_title_'+current_step +', .wizard_nav .steps_image .round_circle:nth-child('+ current_step +')', popup_html).addClass('current');
+                if(current_step === max_steps) {
+                    $next_step.hide();
+                    $submit_btn.show();
+                }
+            });
 
             $('.files', popup_html).change(function(ev) {
                 var slice = [].slice,
@@ -579,16 +612,13 @@ winkstart.module('connect', 'numbers', {
 
                 port_form_data.files = files;
 
-                popup.dialog('close');
+                if(typeof callback === 'function') {
+                    callback(port_form_data);
+                }
             });
 
             popup = winkstart.dialog(popup_html, {
-                title: 'Port a number',
-                onClose: function() {
-                    if(typeof callback == 'function') {
-                        callback(port_form_data);
-                    }
-                }
+                title: 'Port a number'
             });
         },
 

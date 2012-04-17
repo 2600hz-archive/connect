@@ -2,6 +2,10 @@
 	padding: 15px;
 }
 
+.trunkstore_popup button {
+    padding-top: 3px;
+}
+
 .trunkstore_popup input[type="text"]{
 	font-size: 12px;
 	padding: 2px;

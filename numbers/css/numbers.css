@@ -71,3 +71,264 @@
 #addDIDForm .row .select_number {
     margin-top: 5px;
 }
+
+/* Port Number */
+#port_number {
+    background-color: #fff;
+    padding: 0px;
+    cursor: default;
+}
+
+#port_number .wizard_buttons {
+    height: 30px;
+    text-align: right;
+    padding: 25px 20px 0;
+}
+
+#port_number .wizard_buttons .prev_step {
+    height: 18px;
+    width: 67px;
+    background: url('images/prev_step.png');
+    float: left;
+}
+
+#port_number .wizard_buttons .prev_step:hover {
+    background: url('images/prev_step_hover.png');
+}
+
+#port_number .wizard_buttons .next_step {
+    height: 18px;
+    width: 67px;
+    background: url('images/next_step.png');
+}
+
+#port_number .wizard_buttons .next_step:hover {
+    background: url('images/next_step_hover.png');
+}
+
+#port_number .wizard_buttons .submit_btn {
+    width: 97px;
+    height: 28px;
+    background: url('images/submit.png');
+    margin-top: -5px;
+}
+
+#port_number .wizard_buttons .submit_btn:hover {
+    background: url('images/submit_hover.png');
+}
+
+#port_number .wizard_content {
+    margin-top: 20px;
+    margin: auto;
+    background: #fff;
+    width: 588px;
+    padding: 10px;
+}
+
+#port_number .wizard_content form {
+    margin-bottom: 0px;
+}
+
+#port_number .wizard_nav {
+    background: #444;
+}
+
+#port_number .wizard_nav .steps_text {
+    list-style: none;
+    overflow: hidden;
+    padding: 0px;
+    margin: auto;
+    display: block;
+    float: left;
+    font-size: 12px;
+}
+
+#port_number .wizard_nav .steps_image .round_circle {
+    width: 90px;
+    height: 90px;
+    line-height: 90px;
+    font-size: 20px;
+    color: #eee;
+    border-radius: 55px;
+    margin: 10px 30px;
+    border: 1px solid #222;
+    float: left;
+    text-align: center;
+    background: rgb(34,34,34); /* Old browsers */
+    background: -moz-linear-gradient(-45deg,  rgba(34,34,34,1) 0%, rgba(57,57,57,1) 40%, rgba(57,57,57,1) 60%, rgba(34,34,34,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(34,34,34,1)), color-stop(40%,rgba(57,57,57,1)), color-stop(60%,rgba(57,57,57,1)), color-stop(100%,rgba(34,34,34,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg,  rgba(34,34,34,1) 0%,rgba(57,57,57,1) 40%,rgba(57,57,57,1) 60%,rgba(34,34,34,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg,  rgba(34,34,34,1) 0%,rgba(57,57,57,1) 40%,rgba(57,57,57,1) 60%,rgba(34,34,34,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg,  rgba(34,34,34,1) 0%,rgba(57,57,57,1) 40%,rgba(57,57,57,1) 60%,rgba(34,34,34,1) 100%); /* IE10+ */
+    background: linear-gradient(-45deg,  rgba(34,34,34,1) 0%,rgba(57,57,57,1) 40%,rgba(57,57,57,1) 60%,rgba(34,34,34,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222222', endColorstr='#222222',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+#port_number .wizard_nav .steps_image .round_circle.current {
+    background: rgb(3,157,209); /* Old browsers */
+    background: -moz-linear-gradient(-45deg,  rgba(3,157,209,1) 25%, rgba(0,133,192,1) 75%, rgba(2,132,190,1) 87%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(25%,rgba(3,157,209,1)), color-stop(75%,rgba(0,133,192,1)), color-stop(87%,rgba(2,132,190,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg,  rgba(3,157,209,1) 25%,rgba(0,133,192,1) 75%,rgba(2,132,190,1) 87%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg,  rgba(3,157,209,1) 25%,rgba(0,133,192,1) 75%,rgba(2,132,190,1) 87%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg,  rgba(3,157,209,1) 25%,rgba(0,133,192,1) 75%,rgba(2,132,190,1) 87%); /* IE10+ */
+    background: linear-gradient(-45deg,  rgba(3,157,209,1) 25%,rgba(0,133,192,1) 75%,rgba(2,132,190,1) 87%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#039dd1', endColorstr='#0284be',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+#port_number .wizard_nav .steps_text li {
+    font-size: 12px;
+    float: left;
+    color: #fff;
+    width: 132px;
+    padding: 0 10px 10px;
+    text-align: center;
+}
+
+#port_number .wizard_nav .steps_text li span {
+    font-size: 11px;
+    color: #eeeeee;
+    display: block;
+}
+
+#port_number .wizard_nav .steps_text li.current {
+    color: #05addc;
+}
+
+#port_number .port_help {
+    margin-top: 15px;
+    text-align: left;
+    font-size: 10px;
+    line-height: 16px;
+    display: block;
+    font-weight: normal;
+}
+
+#port_number .step_div {
+    display: block;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+}
+
+#port_number .step_div .title {
+    font-weight: bold;
+    font-size: 14px;
+    margin: 10px 0px 25px 15px;
+    text-align: left;
+}
+
+#port_number .step_div .left_part {
+    float: left;
+    text-align: right;
+    width: 48%;
+}
+
+#port_number .step_div .right_part {
+    float: left;
+    text-align: left;
+    margin-left: 4%;
+    width: 48%;
+}
+
+/* Step 1 */
+#port_number .step_div.first {
+    width: 95%;
+    font-weight: bold;
+}
+
+#port_number .step_div.first .split_div {
+    width: 100%;
+    margin-top: 30px;
+}
+
+#port_number .step_div.first .split_div .left_part {
+    width: 48%;
+    float: left;
+    text-align: right;
+}
+
+#port_number .step_div.first .split_div .right_part {
+    width: 48%;
+    float: left;
+    text-align: left;
+    margin-left: 4%;
+}
+
+#port_number .step_div.first .numbers_text {
+    height: 160px;
+    width: 230px;
+}
+
+#port_number .step_div.first select[name="carrier"] {
+    margin-top: 5px;
+    width: 235px;
+    max-width: 235px;
+}
+
+#port_number .step_div.first .numbers_example {
+    color: #05addc;
+    margin-top: 5px;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* Step 2*/
+#port_number .step_div.second .left_part {
+    width: 48%;
+}
+
+#port_number .step_div.second .left_part .field {
+    margin-bottom: 5px;
+}
+
+#port_number .step_div.second .left_part .field label {
+    width: 110px;
+}
+
+#port_number .step_div.second .left_part .field input {
+    width: 150px;
+    border: 1px solid #999;
+}
+
+#port_number .step_div.second .right_part .bill_image {
+    width: 266px;
+    height: 129px;
+    background: url('images/bill.jpg');
+    box-shadow: 1px 3px 3px #444;
+    margin: 0 0 50px;
+}
+
+#port_number .step_div.second .right_part .files {
+    margin-top: 10px;
+}
+
+/* Step 3 */
+#port_number .step_div.third .loa_block {
+    margin: 20px 15px 0px 15px;
+    padding-bottom: 20px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#port_number .step_div.third .loa_block .upload_block {
+    font-size: 11px;
+    float: left;
+    margin: 10px;
+    width: 100%;
+}
+
+/* Step 4 */
+#port_number .step_div.fourth .block:not(:last-child) {
+    padding-bottom: 30px;
+}
+
+#port_number .step_div.fourth .block .checkbox_line {
+    text-align: left;
+    margin: 10px;
+}
+
+#port_number .step_div.fourth .block .checkbox_line input {
+    margin: 0 5px 0 15px;
+}
