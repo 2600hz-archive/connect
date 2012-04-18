@@ -25,18 +25,14 @@
 
 .manage_credits .current_balance_wrapper {
     margin: 20px 0 20px 0;
-    text-align: center;
+    text-align: left;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .manage_credits .current_balance_wrapper button {
     font-size: 12px;
     font-weight: normal;
-}
-
-.manage_credits .trunk_line {
-    padding-bottom: 10px;
 }
 
 .manage_credits .trunk_line .right {
@@ -53,10 +49,31 @@
 
 .manage_credits .note {
     margin-top: 15px;
-    font-size: 12px;
+    font-size: 10px;
+    line-height: 13px;
+}
+
+.manage_credits .price {
+    font-weight: bold;
 }
 
 .manage_credits #inbound_calls, .manage_credits #outbound_calls, .manage_credits #add_credits {
     width: 30px;
+    height: 16px;
+    font-weight: bold;
+    color: #05addc;
+    font-size: 18px;
+    margin-left: 5px;
 }
 
+.manage_credits .description {
+    margin-bottom: 20px;
+}
+
+.manage_credits .trunk_block {
+    padding-bottom: 15px;
+}
+
+.manage_credits .price_wrapper {
+    font-size: 24px;
+}
