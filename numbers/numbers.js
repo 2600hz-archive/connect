@@ -612,9 +612,11 @@ winkstart.module('connect', 'numbers', {
 
                 port_form_data.files = files;
 
-                if(typeof callback === 'function') {
+                /*if(typeof callback === 'function') {
                     callback(port_form_data);
-                }
+                }*/
+
+                console.log(port_form_data);
             });
 
             popup = winkstart.dialog(popup_html, {
