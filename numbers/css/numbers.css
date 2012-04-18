@@ -268,7 +268,7 @@
     width: 230px;
 }
 
-#port_number .step_div.first select[name="carrier"] {
+#port_number .step_div.first .carrier_dropdown {
     margin-top: 5px;
     width: 235px;
     max-width: 235px;
@@ -304,7 +304,7 @@
     height: 129px;
     background: url('images/bill.jpg');
     box-shadow: 1px 3px 3px #444;
-    margin: 0 0 50px;
+    margin: 0 0 24px;
 }
 
 #port_number .step_div.second .right_part .files {

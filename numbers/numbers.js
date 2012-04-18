@@ -520,6 +520,7 @@ winkstart.module('connect', 'numbers', {
                 }),
                 popup,
                 files,
+                loa,
                 phone_numbers,
                 current_step = 1,
                 max_steps = 4,
@@ -554,6 +555,33 @@ winkstart.module('connect', 'numbers', {
                 }
             });
 
+            $('.loa', popup_html).change(function(ev) {
+                var slice = [].slice,
+                    raw_files = slice.call(ev.target.files, 0),
+                    file_reader = new FileReader(),
+                    file_name,
+                    read_file = function(file) {
+                        file_name = file.fileName || file.name || 'noname';
+                        file_reader.readAsBinaryString(file);
+                    };
+
+                loa = [];
+
+                file_reader.onload = function(ev) {
+                    loa.push({
+                        file_name: file_name,
+                        file_data: ev.target.result
+                    });
+
+                    if(raw_files.length > 1) {
+                        raw_files = raw_files.slice(1);
+                        read_file(raw_files[0]);
+                    }
+                };
+
+                read_file(raw_files[0]);
+            });
+
             $('.files', popup_html).change(function(ev) {
                 var slice = [].slice,
                     raw_files = slice.call(ev.target.files, 0),
@@ -586,37 +614,49 @@ winkstart.module('connect', 'numbers', {
 
             $('.submit_btn', popup_html).click(function(ev) {
                 ev.preventDefault();
-
                 port_form_data = form2object('port');
 
-                if(!port_form_data.agreed) {
-                    winkstart.alert('You must agree to the terms before continuing!');
-                    return false;
+                var string_alert = '';
+
+                if(!port_form_data.extra.agreed) {
+                    string_alert = 'You must agree to the terms before continuing!';
                 }
 
-                delete port_form_data.agreed;
-
-                phone_numbers = [];
-
-                port_form_data.phone_numbers = port_form_data.phone_numbers.replace(/[\s-\(\)\.]/g, '').split(',');
-
-                $.each(port_form_data.phone_numbers, function(i, val) {
-                    var result = val.match(/^\+?1?([2-9]\d{9})$/);
-
-                    if(result) {
-                        phone_numbers.push('+1' + result[1]);
+                $.each(port_form_data.extra.cb, function(k, v) {
+                    if(v === false) {
+                        string_alert = 'You must confirm the first conditions before continuing!';
                     }
                 });
 
-                port_form_data.phone_numbers = phone_numbers;
+                if(string_alert === '') {
+                    delete port_form_data.extra;
 
-                port_form_data.files = files;
+                    phone_numbers = [];
 
-                /*if(typeof callback === 'function') {
-                    callback(port_form_data);
-                }*/
+                    port_form_data.phone_numbers = $('.numbers_text', popup_html).val().replace(/[\s-\(\)\.]/g, '').split(',');
 
-                console.log(port_form_data);
+                    $.each(port_form_data.phone_numbers, function(i, val) {
+                        var result = val.match(/^\+?1?([2-9]\d{9})$/);
+
+                        if(result) {
+                            phone_numbers.push('+1' + result[1]);
+                        }
+                    });
+
+                    port_form_data.phone_numbers = phone_numbers;
+
+                    port_form_data.files = files;
+                    port_form_data.loa = loa;
+
+                    /*if(typeof callback === 'function') {
+                        callback(port_form_data);
+                    }*/
+
+                    console.log(port_form_data);
+                }
+                else {
+                    winkstart.alert(string_alert);
+                }
             });
 
             popup = winkstart.dialog(popup_html, {
