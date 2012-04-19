@@ -1,67 +1,65 @@
 <div>
-    <div id="edit_server" class="popup container_resize">
-        <div class="resize">
-            <div class="stylized myform">
-                <form id="endpoint" style="margin: 15px 20px 0px 20px;">
-                    <input type="hidden" name="serverid" value="${serverid}" />
-                    <label>Server Nickname</label><input type="text" name="server_name" value="${server_name}" class="field_last" />
-
-                    <div class="clear"/>
-
-                    <h3>Authentication Method</h3><div class="icon authentication"></div>
-
-                    <div class="clear"/>
-
-                    <p>Your switch or PBX will connect to our service <br/>using a username and password:</p>
-                    <label>Register To</label><input type="text" disabled="true" name="realm" value="${realm}" />
-                    <input type="hidden" name="auth.auth_method" value="Password" />
-                    <label>Username</label><input type="text" name="auth.auth_user" value="${auth.auth_user}"/>
-                    <label>Password</label><input type="text" name="auth.auth_password" class="field_last" value="${auth.auth_password}"/>
-
-                    <div class="clear"/>
-
-                    <h3>Service Location</h3><div class="icon location"></div>
-                    <div class="clear"></div>
-                    <p style="margin-top:4px">The default E911 and service location information:</p>
-                    <label>Address</label>
-                    <input type="text" name="options.e911_info.Address" value="${options.e911_info.Address}" />
-
-                    <label>City</label>
-                    <input type="text" name="options.e911_info.City" value="${options.e911_info.City}" />
-
-                    <label>State</label>
-                    <input type="text" name="options.e911_info.State" value="${options.e911_info.State}" />
-
-                    <label>Postal Code</label>
-                    <input type="text" name="options.e911_info.ZIP" class="field_last" value="${options.e911_info.ZIP}" />
-
-                    <div class="clear"/>
-
-                    <h3>Custom settings</h3><div class="icon limit"></div>
-                    <div class="clear"/>
-
-                    <label>Channel Limit</label>
-                    <input id="max_trunks" type="text" name="options.max_trunks" value="${options.max_trunks}"/>
-                    <div class="clear"/>
-
-                    <label for="compatibility_mode">Compatibility mode</label>
-                    <select id="compatibility_mode" name="options.media_handling">
-                    {{if options.media_handling === 'process'}}
-                        <option value="process" selected="selected">Enabled</option>
-                        <option value="bypass">Disabled</option>
-                    {{else}}
-                        <option value="process">Enabled</option>
-                        <option value="bypass" selected="selected">Disabled</option>
-                    {{/if}}
-                    </select>
-                    <div class="clear"/>
-
-                    <div class="btn_wrapper">
-                        <button class="endpoint edit fancy_button blue">Submit</button>
-                    </div>
-                </form>
+    <div id="edit_server" class="trunkstore_popup">
+        <div style="display: none">
+            <h3>What kind of system is it ?</h3>
+            <div class="pbxs">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
             </div>
         </div>
-    </div>
 
+        <form id="endpoint">
+            <h3>Set your PBX to register to us</h3>
+            <p class="helpertext">You PBX will need to register and send calls to:</p>
+            
+            <div>
+                <label>Register To</label>
+                <input type="text" disabled="true" name="realm" value="${realm}" />
+            </div>
+
+            <div>
+                <label>Username</label>
+                <input type="text" name="auth.auth_user" value="${auth.auth_user}"/>
+            </div>
+
+            <div>
+                  <label>Password</label>
+                  <input type="text" name="auth.auth_password" value="${auth.auth_password}"/>
+            </div>
+            <input type="hidden" name="auth.auth_method" value="Password" />
+            <input type="hidden" name="serverid" value="${serverid}" />
+
+             <h3>Name your PBX</h3>
+
+             <div>
+                  <label>Name your PBX</label>
+                  <input type="text" name="server_name" value="${server_name}"/>
+            </div>
+
+            <div style="display: none">
+                <label for="compatibility_mode">Compatibility mode</label>
+                <select id="compatibility_mode" name="options.media_handling">
+                {{if options.media_handling === 'process'}}
+                    <option value="process" selected="selected">Enabled</option>
+                    <option value="bypass">Disabled</option>
+                {{else}}
+                    <option value="process">Enabled</option>
+                    <option value="bypass" selected="selected">Disabled</option>
+                {{/if}}
+                </select>
+            </div>
+            <div class="buttons_centered">
+                <a class="fancy_button blue endpoint edit" href="#">Save</a>
+            </div>
+            <a href="#" style="float: right">Setup Intruction</a>
+        </form>
+    </div>
 </div>

@@ -793,7 +793,8 @@ winkstart.module('connect', 'numbers', {
                     if(typeof callback == 'function') {
                         callback(cnam_form_data);
                     }
-                }
+                },
+                width: '450px'
             });
         },
 

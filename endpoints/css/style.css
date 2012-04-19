@@ -1,4 +1,21 @@
-#edit_server .icon {
-    margin-left: -10px;
-    margin-top: -5px;
+#edit_server form > div:not(:last-child) {
+	margin: 20px 0 20px 0;
+}
+
+.pbxs {
+    width: 350px;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: 20px 0 20px 0;
+}
+
+.pbxs .ui-selected {
+	box-shadow: inset 0 0 5px 5px yellow;
+}
+
+.pbxs div {
+    width: 50px;
+    height: 50px;
+    border: 1px dotted red;
+    display: inline-block;
 }

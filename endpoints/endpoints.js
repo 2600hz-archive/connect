@@ -124,7 +124,8 @@ winkstart.module('connect', 'endpoints', {
                 });
             });
 
-            popup = winkstart.dialog(popup_html, { title: 'Edit endpoint' });
+            popup = winkstart.dialog(popup_html, { title: 'Hookup your pbx or third-party system' });
+            $( ".pbxs" ).selectable();
         },
 
         render_endpoint: function(data, index, parent) {
