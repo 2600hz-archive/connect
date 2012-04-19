@@ -203,6 +203,10 @@
     color: #05addc;
 }
 
+#port_number input {
+    border: 1px solid #999;
+}
+
 #port_number .port_help {
     margin-top: 15px;
     text-align: left;
@@ -281,6 +285,11 @@
     font-weight: bold;
 }
 
+#port_number .step_div.first .other_carrier {
+    margin-top: 5px;
+    width: 229px;
+}
+
 /* Step 2*/
 #port_number .step_div.second .left_part {
     width: 48%;
@@ -296,7 +305,6 @@
 
 #port_number .step_div.second .left_part .field input {
     width: 150px;
-    border: 1px solid #999;
 }
 
 #port_number .step_div.second .right_part .bill_image {

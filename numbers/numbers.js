@@ -532,6 +532,17 @@ winkstart.module('connect', 'numbers', {
             $prev_step.hide();
             $submit_btn.hide();
 
+            $('.other_carrier', popup_html).hide();
+
+            $('.carrier_dropdown', popup_html).change(function() {
+                if($(this).val() === 'Other') {
+                    $('.other_carrier', popup_html).show();
+                }
+                else {
+                    $('.other_carrier', popup_html).empty().hide();
+                }
+            });
+
             $('.prev_step', popup_html).click(function() {
                 $next_step.show();
                 $submit_btn.hide();
@@ -631,9 +642,13 @@ winkstart.module('connect', 'numbers', {
                 if(string_alert === '') {
                     delete port_form_data.extra;
 
-                    phone_numbers = [];
+                    if($('.carrier_dropdown', popup_html).val() === 'Other') {
+                        port_form_data.port.service_provider = $('.other_carrier', popup_html).val();
+                    }
 
-                    port_form_data.phone_numbers = $('.numbers_text', popup_html).val().replace(/[\s-\(\)\.]/g, '').split(',');
+                    phone_numbers = [];
+                    port_form_data.phone_numbers = $('.numbers_text', popup_html).val().replace(/\n/g,',');
+                    port_form_data.phone_numbers = port_form_data.phone_numbers.replace(/[\s-\(\)\.]/g, '').split(',');
 
                     $.each(port_form_data.phone_numbers, function(i, val) {
                         var result = val.match(/^\+?1?([2-9]\d{9})$/);
@@ -648,10 +663,11 @@ winkstart.module('connect', 'numbers', {
                     port_form_data.files = files;
                     port_form_data.loa = loa;
 
-                    /*if(typeof callback === 'function') {
-                        callback(port_form_data);
-                    }*/
+                    port_form_data.port.main_number = port_form_data.phone_numbers[0];
 
+                    if(typeof callback === 'function') {
+                        callback(port_form_data);
+                    }
                     console.log(port_form_data);
                 }
                 else {
