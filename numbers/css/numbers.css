@@ -203,10 +203,6 @@
     color: #05addc;
 }
 
-#port_number input {
-    border: 1px solid #999;
-}
-
 #port_number .port_help {
     margin-top: 15px;
     text-align: left;

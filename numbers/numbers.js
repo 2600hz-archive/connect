@@ -629,46 +629,55 @@ winkstart.module('connect', 'numbers', {
 
                 var string_alert = '';
 
+                if($('.carrier_dropdown', popup_html).val() === 'Other') {
+                    port_form_data.port.service_provider = $('.other_carrier', popup_html).val();
+                }
+
                 if(!port_form_data.extra.agreed) {
-                    string_alert = 'You must agree to the terms before continuing!';
+                    string_alert += 'You must agree to the terms before continuing!<br/>';
                 }
 
                 $.each(port_form_data.extra.cb, function(k, v) {
                     if(v === false) {
-                        string_alert = 'You must confirm the first conditions before continuing!';
+                        string_alert += 'You must confirm the first conditions before continuing!<br/>';
+                        return false;
                     }
                 });
+
+                if(port_form_data.port.main_number === '') {
+                    string_alert += 'You need to enter a main number.<br/>';
+                }
+
+                port_form_data.phone_numbers = $('.numbers_text', popup_html).val().replace(/\n/g,',');
+                port_form_data.phone_numbers = port_form_data.phone_numbers.replace(/[\s-\(\)\.]/g, '').split(',');
+
+                port_form_data.port.main_number = port_form_data.port.main_number.replace(/[\s-\(\)\.]/g, '');
+                port_form_data.phone_numbers.push(port_form_data.port.main_number);
+
+                phone_numbers = [];
+                $.each(port_form_data.phone_numbers, function(i, val) {
+                    var result = val.match(/^\+?1?([2-9]\d{9})$/);
+
+                    if(result) {
+                        phone_numbers.push('+1' + result[1]);
+                    }
+                    else {
+                        if(val !== '') {
+                            string_alert += val + ' : this Phone Number is not valid.<br/>';
+                        }
+                    }
+                });
+                port_form_data.phone_numbers = phone_numbers;
+
+                port_form_data.files = files;
+                port_form_data.loa = loa;
 
                 if(string_alert === '') {
                     delete port_form_data.extra;
 
-                    if($('.carrier_dropdown', popup_html).val() === 'Other') {
-                        port_form_data.port.service_provider = $('.other_carrier', popup_html).val();
-                    }
-
-                    phone_numbers = [];
-                    port_form_data.phone_numbers = $('.numbers_text', popup_html).val().replace(/\n/g,',');
-                    port_form_data.phone_numbers = port_form_data.phone_numbers.replace(/[\s-\(\)\.]/g, '').split(',');
-
-                    $.each(port_form_data.phone_numbers, function(i, val) {
-                        var result = val.match(/^\+?1?([2-9]\d{9})$/);
-
-                        if(result) {
-                            phone_numbers.push('+1' + result[1]);
-                        }
-                    });
-
-                    port_form_data.phone_numbers = phone_numbers;
-
-                    port_form_data.files = files;
-                    port_form_data.loa = loa;
-
-                    port_form_data.port.main_number = port_form_data.phone_numbers[0];
-
                     if(typeof callback === 'function') {
                         callback(port_form_data);
                     }
-                    console.log(port_form_data);
                 }
                 else {
                     winkstart.alert(string_alert);

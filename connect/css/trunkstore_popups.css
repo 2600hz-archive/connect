@@ -9,9 +9,13 @@
 .trunkstore_popup input[type="text"]{
 	font-size: 12px;
 	padding: 2px;
-	border: solid 1px #09F;
+    border: 1px solid #999;
 	width: 200px;
 	border-radius: 5px;
+}
+
+.trunkstore_popup input[type="text"]:focus {
+    border: 1px solid #0be;
 }
 
 .trunkstore_popup h2 {
