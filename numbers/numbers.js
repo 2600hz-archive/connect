@@ -777,6 +777,15 @@ winkstart.module('connect', 'numbers', {
                 popup_html = THIS.templates.e911_dialog.tmpl(e911_data || {}),
                 popup;
 
+            $('#postal_code', popup_html).blur(function() {
+                $.getJSON('http://www.geonames.org/postalCodeLookupJSON?&country=US&callback=?', { postalcode: $(this).val() }, function(response) {
+                    if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
+                        $('#locality', popup_html).val(response.postalcodes[0].placeName);
+                        $('#region', popup_html).val(response.postalcodes[0].adminName1);
+                    }
+                });
+            });
+
             $('.submit_btn', popup_html).click(function(ev) {
                 ev.preventDefault();
 
