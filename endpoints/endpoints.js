@@ -110,10 +110,28 @@ winkstart.module('connect', 'endpoints', {
                 popup_html = THIS.templates.endpoint_dialog.tmpl(endpoint_data),
                 popup;
 
-            $('.endpoint.edit', popup_html).click(function(ev) {
-                var form_data = form2object('endpoint');
+            $.each($('.pbxs .pbx', popup_html), function() {
+                if($(this).dataset('pbx_name') === endpoint_data.server_type) {
+                    $(this).addClass('selected');
+                    return false;
+                }
+            });
 
+            if(endpoint_data.server_type && $('.pbxs .pbx.selected', popup_html).size() === 0) {
+                $('.pbxs .pbx.other', popup_html).addClass('selected');
+            }
+
+            if(!endpoint_data.server_type) {
+                $('.info_pbx', popup_html).hide();
+            }
+
+            $('.endpoint.edit', popup_html).click(function(ev) {
                 ev.preventDefault();
+                var form_data = form2object('endpoint');
+                form_data.server_type = $('.pbxs .selected', popup_html).dataset('pbx_name');
+                if(form_data.server_type === 'other') {
+                    form_data.server_type = $('#other_name', popup_html).val();
+                }
 
                 THIS.save_endpoint(form_data, data, function(_data) {
                     popup.dialog('close');
@@ -124,8 +142,27 @@ winkstart.module('connect', 'endpoints', {
                 });
             });
 
+            $('.pbxs .pbx', popup_html).click(function() {
+                $('.info_pbx', popup_html).show();
+                $('.pbxs .pbx', popup_html).removeClass('selected');
+                $(this).addClass('selected');
+
+                $('.selected_pbx_block', popup_html).slideDown('fast');
+                $('.selected_pbx', popup_html).html($('.pbxs .selected', popup_html).dataset('pbx_name'));
+
+                if($(this).hasClass('other')) {
+                    $('.selected_pbx_block', popup_html).hide();
+                    $('.other_name_wrapper', popup_html).slideDown();
+                    $('#other_name', popup_html).focus();
+                }
+                else {
+                    $('.other_name_wrapper', popup_html).hide();
+                    $('.selected_pbx_block', popup_html).slideDown();
+                    $('input[name="auth.auth_user"]', popup_html).focus();
+                }
+            });
+
             popup = winkstart.dialog(popup_html, { title: 'Hookup your pbx or third-party system' });
-            $( ".pbxs" ).selectable();
         },
 
         render_endpoint: function(data, index, parent) {

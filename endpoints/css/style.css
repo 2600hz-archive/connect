@@ -1,21 +1,160 @@
-#edit_server form > div:not(:last-child) {
-	margin: 20px 0 20px 0;
+#edit_server {
+    padding: 10px 30px;
 }
 
-.pbxs {
-    width: 350px;
+#edit_server .endpoint.edit {
+    float: right;
+}
+
+#edit_server form {
+    margin-bottom: 0px;
+}
+
+#edit_server form > div:not(:last-child) {
+	margin: 10px 0;
+}
+
+#edit_server .block {
+    border-bottom: 1px solid #888;
+    padding: 15px;
+}
+
+#edit_server .block:last-child {
+    border-bottom: none;
+}
+
+#edit_server .block .field {
+    margin-top: 10px;
+}
+
+#edit_server .title {
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0 0 10px 0;
+}
+
+#edit_server .note {
+    font-size: 12px;
+    font-weight: normal;
+    padding: 0px 0px 15px 0px;
+}
+
+#edit_server .pbxs {
+    width: 530px;
+    height: 95px;
     overflow-x: auto;
     white-space: nowrap;
-    margin: 20px 0 20px 0;
+    margin: 20px 0 0 0;
 }
 
-.pbxs .ui-selected {
-	box-shadow: inset 0 0 5px 5px yellow;
+#edit_server #endpoints {
+    margin: 0px;
 }
 
-.pbxs div {
-    width: 50px;
-    height: 50px;
-    border: 1px dotted red;
+#edit_server .instructions {
+    font-size: 13px;
+    margin-left: 15px;
+}
+
+#edit_server .pbxs .pbx {
+    width: 98px;
+    height: 73px;
+    border: 2px solid #666;
+    border-radius: 5px;
     display: inline-block;
+    font-weight: bold;
+    line-height: 69px;
+    margin: auto;
+    background: #fff;
+    text-align: center;
+}
+
+#edit_server .pbxs .pbx.selected {
+    border: 2px solid #05addc;
+    color: #05addc;
+}
+
+#edit_server .info_pbx {
+    min-height: 25px;
+}
+
+#edit_server .selected_pbx {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#edit_server .other_name_wrapper {
+    display: none;
+}
+
+#edit_server .pbxs .threecom {
+    background: url('images/3com.png');
+}
+
+#edit_server .pbxs .allworks {
+    background: url('images/allworks.png');
+}
+
+#edit_server .pbxs .altigen {
+    background: url('images/altigen.png');
+}
+
+#edit_server .pbxs .asterisk {
+    background: url('images/asterisk.png');
+}
+
+#edit_server .pbxs .avaya {
+    background: url('images/avaya.png');
+}
+
+#edit_server .pbxs .cisco {
+    background: url('images/cisco.png');
+}
+
+#edit_server .pbxs .digium {
+    background: url('images/digium.png');
+}
+
+#edit_server .pbxs .epygi {
+    background: url('images/epygi.png');
+}
+
+#edit_server .pbxs .freepbx {
+    background: url('images/freepbx.png');
+}
+
+#edit_server .pbxs .mitel {
+    background: url('images/mitel.png');
+}
+
+#edit_server .pbxs .objectworld {
+    background: url('images/objectworld.png');
+}
+
+#edit_server .pbxs .pingtel {
+    background: url('images/pingtel.png');
+}
+
+#edit_server .pbxs .responsepoint {
+    background: url('images/responsepoint.png');
+}
+
+#edit_server .pbxs .samsung {
+    background: url('images/samsung.png');
+}
+
+#edit_server .pbxs .shoretel {
+    background: url('images/shortel.png');
+}
+
+#edit_server .pbxs .sutus {
+    background: url('images/sutus.png');
+}
+
+#edit_server .pbxs .talkswitch {
+    background: url('images/talkswitch.png');
+}
+
+#edit_server .pbxs .tradium {
+    background: url('images/tradium.png');
 }

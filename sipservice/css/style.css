@@ -71,6 +71,7 @@
 #endpoint_list .endpoint .title .status .state { margin: 0 3px 0 2px; color:#d93636; font-size:14px; }
 #endpoint_list .endpoint .title .status a { color:#4e4d4d; }
 #endpoint_list .endpoint .title .status a:hover { text-decoration:none; color:#2AB9E1; }
+#endpoint_list .endpoint .title .status a.deleteServer:hover { color: #ff0000; }
 
 /* server area -> SIP */
 #endpoint_list .endpoint .sip { height:59px; width:425px; background:url(../images/bg_server_sip.jpg) top left no-repeat; font-size:12px; }

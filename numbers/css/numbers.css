@@ -79,15 +79,6 @@
     cursor: default;
 }
 
-#port_number a {
-    text-decoration: underline;
-    color: #0be;
-}
-
-#port_number a:hover {
-    color: #05addc;
-}
-
 #port_number .wizard_buttons {
     height: 30px;
     text-align: right;

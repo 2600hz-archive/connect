@@ -121,10 +121,13 @@ winkstart.module('connect', 'credits', {
             var THIS = this;
 
             THIS.get_credits(function(_data, status) {
-                /* Update of the prepay value from braintree */
-                data.account.credits.prepay = _data.data.amount;
+                var data_tmpl = {
+                    credits: _data.data.amount,
+                    inbound_trunks: data.account.inbound_trunks,
+                    trunks: data.account.trunks
+                };
 
-                var popup_html = THIS.templates.credits_dialog.tmpl(data),
+                var popup_html = THIS.templates.credits_dialog.tmpl(data_tmpl),
                     popup;
 
                 $('ul.settings1', popup_html).tabs($('.pane > div', popup_html));
@@ -138,7 +141,7 @@ winkstart.module('connect', 'credits', {
                             $('.current_balance', popup_html).empty()
                                                              .text(_data.data.amount);
 
-                            $('.amount', parent).empty().html('$'+_data.data.amount);
+                            $('#credits .amount', parent).empty().html('$'+_data.data.amount);
 
                             if(typeof callback === 'function') {
                                 callback(_data);

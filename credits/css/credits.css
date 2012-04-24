@@ -66,6 +66,10 @@
     margin-left: 5px;
 }
 
+.manage_credits #add_credits {
+    width: 60px;
+}
+
 .manage_credits .description {
     margin-bottom: 20px;
 }
@@ -76,4 +80,8 @@
 
 .manage_credits .price_wrapper {
     font-size: 24px;
+}
+
+.manage_credits .settings_tabs li > a:hover {
+    color: #fff;
 }

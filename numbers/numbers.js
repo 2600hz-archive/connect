@@ -68,7 +68,7 @@ winkstart.module('connect', 'numbers', {
 
             'number_doc.create': {
                 url: '{api_url}/accounts/{account_id}/phone_numbers/{phone_number}/docs/{file_name}',
-                contentType: 'application/octet-stream',
+                contentType: 'application/x-base64',
                 verb: 'PUT'
             },
 
@@ -80,7 +80,7 @@ winkstart.module('connect', 'numbers', {
 
             'number_doc.update': {
                 url: '{api_url}/accounts/{account_id}/phone_numbers/{phone_number}/doc/{file_name}',
-                contentType: 'application/octet-stream',
+                contentType: 'application/x-base64',
                 verb: 'POST'
             },
 
@@ -385,26 +385,30 @@ winkstart.module('connect', 'numbers', {
                     });
                 },
                 put_port_doc = function(index) {
+                    /* Add files */
                     THIS.create_number_doc({
                             phone_number: number_data.phone_number,
-                            file_name: port_data.files[index].file_name,
-                            file_data: port_data.files[index].file_data
+                            file_name: port_data.loa[0].file_name,
+                            file_data: port_data.loa[0].file_data
                         },
                         function(_data, status) {
-                            if(index >= port_data.files.length - 1) {
-                                put_port_data();
-                            }
-                            else {
-                                put_port_doc(index + 1);
-                            }
+                            THIS.create_number_doc({
+                                    phone_number: number_data.phone_number,
+                                    file_name: port_data.files[index].file_name,
+                                    file_data: port_data.files[index].file_data
+                                },
+                                function(_data, status) {
+                                    put_port_data();
+                                }
+                            );
                         }
                     );
                 };
 
-            if(port_data.files.length) {
+            if(port_data.port.main_number === number_data.phone_number) {
                 put_port_doc(0);
             }
-            else {
+            else{
                 put_port_data();
             }
         },
@@ -543,6 +547,15 @@ winkstart.module('connect', 'numbers', {
                 }
             });
 
+            $('#postal_code', popup_html).blur(function() {
+                $.getJSON('http://www.geonames.org/postalCodeLookupJSON?&country=US&callback=?', { postalcode: $(this).val() }, function(response) {
+                    if (response && response.postalcodes.length && response.postalcodes[0].placeName) {
+                        $('#locality', popup_html).val(response.postalcodes[0].placeName);
+                        $('#region', popup_html).val(response.postalcodes[0].adminName1);
+                    }
+                });
+            });
+
             $('.prev_step', popup_html).click(function() {
                 $next_step.show();
                 $submit_btn.hide();
@@ -573,7 +586,7 @@ winkstart.module('connect', 'numbers', {
                     file_name,
                     read_file = function(file) {
                         file_name = file.fileName || file.name || 'noname';
-                        file_reader.readAsBinaryString(file);
+                        file_reader.readAsDataURL(file);
                     };
 
                 loa = [];
@@ -600,7 +613,7 @@ winkstart.module('connect', 'numbers', {
                     file_name,
                     read_file = function(file) {
                         file_name = file.fileName || file.name || 'noname';
-                        file_reader.readAsBinaryString(file);
+                        file_reader.readAsDataURL(file);
                     };
 
                 files = [];
@@ -644,14 +657,14 @@ winkstart.module('connect', 'numbers', {
                     }
                 });
 
-                if(port_form_data.port.main_number === '') {
-                    string_alert += 'You need to enter a main number.<br/>';
-                }
-
                 port_form_data.phone_numbers = $('.numbers_text', popup_html).val().replace(/\n/g,',');
                 port_form_data.phone_numbers = port_form_data.phone_numbers.replace(/[\s-\(\)\.]/g, '').split(',');
 
                 port_form_data.port.main_number = port_form_data.port.main_number.replace(/[\s-\(\)\.]/g, '');
+
+                var res = port_form_data.port.main_number.match(/^\+?1?([2-9]\d{9})$/);
+                res ? port_form_data.port.main_number = '+1' + res[1] : string_alert += 'You need to enter a main number.<br/>';
+
                 port_form_data.phone_numbers.push(port_form_data.port.main_number);
 
                 phone_numbers = [];
@@ -676,7 +689,7 @@ winkstart.module('connect', 'numbers', {
                     delete port_form_data.extra;
 
                     if(typeof callback === 'function') {
-                        callback(port_form_data);
+                        callback(port_form_data, popup);
                     }
                 }
                 else {
@@ -1015,7 +1028,7 @@ winkstart.module('connect', 'numbers', {
             $('.numbers.port', numbers_html).click(function(ev) {
                 ev.preventDefault();
 
-                THIS.render_port_dialog(function(port_data) {
+                THIS.render_port_dialog(function(port_data, popup) {
                     var ports_done = 0;
 
                     $.each(port_data.phone_numbers, function(i, val) {
@@ -1034,10 +1047,11 @@ winkstart.module('connect', 'numbers', {
                                 if(++ports_done > port_data.phone_numbers.length - 1) {
                                     $.each(port_data.phone_numbers, function(i, val) {
                                         data.DIDs_Unassigned[val] = {};
+                                    });
 
-                                        THIS.update_trunkstore(data, function(_data) {
-                                            winkstart.publish('trunkstore.refresh', _data.data);
-                                        });
+                                    THIS.update_trunkstore(data, function(_data) {
+                                        winkstart.publish('trunkstore.refresh', _data.data);
+                                        popup.dialog('close');
                                     });
                                 }
                             });
