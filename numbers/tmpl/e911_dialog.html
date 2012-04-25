@@ -7,29 +7,25 @@
                 <h3>Default E911 Service Location</h3>
             {{/if}}
             <form id="e911" action="#">
-                <p class="clear">Address to display on 911 operator console:<p>
+                <div class="help"><span class="note_icon"/>Address to display on 911 operator console</div>
 
-                <div>
+                <div class="inline_field">
                     <label>Postal Code</label>
                     <input id="postal_code" type="text" name="postal_code" value="${postal_code}"/>
                 </div>
-
-                <div>
+                <div class="inline_field">
                     <label>Address</label>
                     <input type="text" name="street_address" value="${street_address}" />
                 </div>
-
-                <div>
+                <div class="inline_field">
                     <label>Ext. Address</label>
                     <input type="text" name="extended_address" value="${extended_address}" />
                 </div>
-
-                <div>
+                <div class="inline_field">
                     <label>City</label>
                     <input id="locality" type="text" name="locality" value="${locality}" />
                 </div>
-
-                <div>
+                <div class="inline_field">
                     <label>State</label>
                     <input id="region" type="text" name="region" value="${region}" />
                 </div>

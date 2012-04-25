@@ -1,6 +1,7 @@
 .trunkstore_popup {
 	padding: 15px;
     font-family: Helvetica;
+    cursor: default;
 }
 
 .trunkstore_popup button {
@@ -38,7 +39,7 @@
 .trunkstore_popup h3 {
 	font-size: 14.5px;
     font-weight: bold;
-    text-align: center;
+    text-align: left;
 }
 
 .trunkstore_popup p {
@@ -86,4 +87,17 @@
 	width: auto;
     padding: 15px 15px 0 15px;
     text-align: center;
+}
+
+.trunkstore_popup .inline_field {
+    margin-top: 20px;
+    line-height: 30px;
+}
+
+.trunkstore_popup .inline_field label {
+    width: auto;
+    text-align: right;
+    margin-right: 10px;
+    line-height: 30px;
+    min-width: 80px;
 }

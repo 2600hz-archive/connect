@@ -1,22 +1,18 @@
 <div>
     <div class="trunkstore_popup cnam">
         <div>
-            {{if did}}
-                <h3>Caller ID Name for ${did}</h3>
+            {{if phone_number}}
+                <h3>Caller ID Name for ${phone_number}</h3>
             {{else}}
                 <h3>Default Caller ID Name</h3>
             {{/if}}
             <form id="cnam" method="post" action="#">
-                <p class="clear">When you call someone, show this as your name on their Caller ID Device:</p>
+                <div class="help"><div class="note_icon"/>When you call someone, show this as your name on their Caller ID Device:</div>
+                <div class="help"><div class="note_icon"/>These requests take up to 72 hours to process and can only be placed once every 72 hours.</div>
 
-                <div>
-                    <label>Caller ID Name: </label>
-                    <input type="text" name="display_name" class="field_last" value="${display_name}"/>
-                </div>
-
-                <p class="note_box">Note: These requests take up to 72 hours to process and can only be placed once every 72 hours.</p>
-
-                <div class="buttons_centered">
+                <div class="inline_field">
+                    <label>Caller ID Name</label>
+                    <input type="text" name="display_name" value="${display_name}"/>
                     <button class="fancy_button blue submit_btn" href="#">Submit</button>
                 </div>
             </form>

@@ -244,7 +244,7 @@ winkstart.module('connect', 'numbers', {
         activate_number: function(data, success, error) {
             var THIS = this;
 
-            winkstart.request(true, 'number.activate', {
+            winkstart.request(false, 'number.activate', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url,
                     phone_number: encodeURIComponent(data.phone_number),
@@ -332,6 +332,7 @@ winkstart.module('connect', 'numbers', {
 
                 THIS.activate_number(number_data, function(_data, status) {
                         data.DIDs_Unassigned[number_data.phone_number] = number_data.options;
+
 
                         THIS.add_numbers(numbers_data.slice(1), data, callback);
                     },
@@ -763,8 +764,6 @@ winkstart.module('connect', 'numbers', {
                     numbers_data.push($(this).dataset());
                 });
 
-                console.log(numbers_data);
-
                 popup.dialog('close');
             });
 
@@ -828,6 +827,7 @@ winkstart.module('connect', 'numbers', {
         },
 
         render_cnam_dialog: function(cnam_data, callback) {
+            console.log(cnam_data);
             var THIS = this,
                 cnam_form_data = {},
                 popup_html = THIS.templates.cnam_dialog.tmpl(cnam_data || {}),
@@ -848,16 +848,18 @@ winkstart.module('connect', 'numbers', {
                         callback(cnam_form_data);
                     }
                 },
-                width: '450px'
+                width: '430px'
             });
         },
 
         render_failover_dialog: function(failover_data, callback) {
             var THIS = this,
                 failover_form_data = {},
-                popup_html = THIS.templates.failover_dialog.tmpl({
-                    failover: (failover_data || {}).e164 || (failover_data || {}).sip || ''
-                }),
+                tmpl_data = {
+                    failover: (failover_data || {}).e164 || (failover_data || {}).sip || '',
+                    phone_number: failover_data.phone_number || ''
+                },
+                popup_html = THIS.templates.failover_dialog.tmpl(tmpl_data),
                 popup,
                 result;
 
@@ -887,7 +889,8 @@ winkstart.module('connect', 'numbers', {
                     if(typeof callback == 'function') {
                         callback(failover_form_data);
                     }
-                }
+                },
+                width: '450px'
             });
         },
 
@@ -1050,9 +1053,11 @@ winkstart.module('connect', 'numbers', {
                 }
                 else {
                     THIS.render_add_number_dialog(function(numbers_data) {
-                        THIS.add_numbers(numbers_data, data, function(_data) {
-                            winkstart.publish('trunkstore.refresh', _data.data);
-                        });
+                        if(numbers_data.length > 0) {
+                            THIS.add_numbers(numbers_data, data, function(_data) {
+                                winkstart.publish('trunkstore.refresh', _data.data);
+                            });
+                        }
                     });
                 }
             });

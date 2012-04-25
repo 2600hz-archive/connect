@@ -87,6 +87,14 @@
     display: none;
 }
 
+#edit_server .pbxs .bluebox {
+    background: url('images/bluebox.png');
+}
+
+#edit_server .pbxs .freeswitch {
+    background: url('images/freeswitch.png');
+}
+
 #edit_server .pbxs .threecom {
     background: url('images/3com.png');
 }
