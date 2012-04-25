@@ -732,7 +732,11 @@ winkstart.module('connect', 'numbers', {
                 popup_html = THIS.templates.add_number_dialog.tmpl(),
                 popup;
 
+            $('.toggle_div', popup_html).hide();
+
             $('#search_numbers_button', popup_html).click(function(ev) {
+                $('.toggle_div', popup_html).hide();
+
                 var npa_data = {},
                     npa = $('#sdid_npa', popup_html).val(),
                     nxx = $('#sdid_nxx', popup_html).val();
@@ -747,22 +751,41 @@ winkstart.module('connect', 'numbers', {
                     $('#foundDIDList', popup_html)
                         .empty()
                         .append(results_html);
+
+                    $('.toggle_div', popup_html).show();
                 });
             });
 
             $('#add_numbers_button', popup_html).click(function(ev) {
                 ev.preventDefault();
 
-                $('#foundDIDList .f_dids:checked', popup_html).each(function() {
+                $('#foundDIDList .checkbox_number:checked', popup_html).each(function() {
                     numbers_data.push($(this).dataset());
                 });
 
+                console.log(numbers_data);
+
                 popup.dialog('close');
+            });
+
+            $(popup_html).delegate('.checkbox_number', 'click', function() {
+                var selected_numbers =  $('.checkbox_number:checked', popup_html).size(),
+                    sum_price = 0;
+
+                $.each($('.checkbox_number:checked', popup_html), function() {
+                    sum_price += parseFloat($(this).dataset('price'));
+                });
+
+                sum_price = '$'+sum_price+'.00';
+
+                $('.selected_numbers', popup_html).html(selected_numbers);
+                $('.cost_numbers', popup_html).html(sum_price);
             });
 
             popup = winkstart.dialog(popup_html, {
                 title: 'Add number',
                 width: '600px',
+                position: ['center', 20],
                 onClose: function() {
                     if(typeof callback == 'function') {
                         callback(numbers_data);

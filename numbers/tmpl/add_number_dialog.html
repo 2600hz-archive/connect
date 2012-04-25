@@ -1,37 +1,39 @@
 <div>
     <div id="edit_number" class="trunkstore_popup add_number">
-        <div>
-            <div>
-                <p class="note_box">
-                    You can specify the area code and up to 3 numbers of the local prefix.
-                    For Toll Free number please enter 800, 888, 877, 866, 855 in the area code.<br /><br />
-                    If you order from an area showing only six digits, we'll randomly select a new number in that area.
-                </p>
-
-                <form id="sdidform" action="" onsubmit="return false;">
-                    <div id="sdiddiv">
-                        <span id="ACspan">( </span>
-                        <input type="text" id="sdid_npa" name="NPA" maxlength="3" pattern="^[2-9][0-8][0-9]$" /> 
-                        <span id="COCspan"> ) - </span><input type="text" id="sdid_nxx"  name="NXX" maxlength="3" pattern="^[2-9]\d\d$" /> 
-                        <span id="help_did_add_dids" class="help_bt"> </span>
-                    </div>
-                </form>
-
-                <div class="buttons_centered">
-                    <a id="search_numbers_button" class="fancy_button blue" href="#">Search</a>
-                </div>
+        <div class="header_nav">
+            <div class="area_code_wrapper">
+                #&nbsp;(<input type="text" class="area_code_input"  id="sdid_npa" maxlength="3" placeholder="Area Code" pattern="^[2-9][0-8][0-9]$"/>)&nbsp;-&nbsp;<input type="text" class="area_code_input"  id="sdid_nxx" maxlength="3" placeholder="Prefix" pattern="^[2-9]\d\d$"/>
+                <span id="search_numbers_button" class="search_number"/>
             </div>
-                <div id="foundDIDList"/>
-
+            <div class="help_wrapper">
+                <a class="find_area_code" href="http://www.whitepages.com/area-codes" target="_blank">Find area code</a>
+                <span class="optional_field">(Optional)</span>
+            </div>
+        </div>
+        <div class="content">
             <div>
-                <div class="search_icon"/>
-                <div class="table1"/>
-                <div class="table2"/>
-                <p class="note_box">Each number you select will be added to your monthly invoice.</p>
-                <div class="buttons_centered">
-                    <a id="add_numbers_button" class="fancy_button blue submit_btn" href="#">Add</a>
+                <span class="help"><span class="note_icon"/>You can specify the area code and up to 3 numbers of the local prefix. For Toll Free number please enter 800, 888, 877, 866, 855 in the area code field.</span>
+            </div>
+
+            <div class="toggle_div">
+                <h2>Select numbers to add</h2>
+                <div class="split_div">
+                    <div class="left">
+                        <div id="foundDIDList"/>
+                    </div>
+
+                    <div class="right">
+                        <span class="help"><span class="note_icon"/>Each number you select will be charged to your monthly invoice</span>
+
+                        <div class="stats">
+                            <div class="stats_left title_stats">Total selected numbers</div> <div class="selected_numbers stat_number stats_right">0</div>
+                            <div class="stats_left title_stats">Monthly charge</div> <div class="cost_numbers stat_number stats_right">$0.00</div>
+                            <div class="stats_left">&nbsp;</div> <div class="stats_right"><button id="add_numbers_button" class="fancy_button blue submit_btn">Add</button></div>
+                            <div class="clear"/>
+                        </div>
+                    </div>
                 </div>
-                <div class="helpertext">Clicking the "Add Button" will charge your credit card</div>
+                <div class="clear"/>
             </div>
         </div>
     </div>

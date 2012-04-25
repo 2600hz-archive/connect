@@ -1,5 +1,6 @@
 .trunkstore_popup {
 	padding: 15px;
+    font-family: Helvetica;
 }
 
 .trunkstore_popup button {
@@ -63,6 +64,15 @@
     margin-top: 10px;
     border: 2px solid #A6A6A6;
     text-align: center;
+}
+
+.trunkstore_popup .help {
+    margin-top: 15px;
+    text-align: left;
+    font-size: 10px;
+    line-height: 16px;
+    display: block;
+    font-weight: normal;
 }
 
 .trunkstore_popup .buttons {

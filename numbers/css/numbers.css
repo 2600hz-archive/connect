@@ -1,75 +1,182 @@
-#sdidform #sdid_npa {
-    width: 2em;
-    float: none;
+/* Add DID Popup */
+#edit_number {
+    padding: 0px;
 }
 
-#sdidform #sdid_nxx {
-    width: 2em;
-    float: none;
+#edit_number .help {
+    margin-top: 0px;
+    font-size: 11px;
 }
 
-#sdiddiv {
+#edit_number .header_nav {
+    padding: 40px 0 30px;
+    background: #444;
+}
+
+#edit_number input[type="checkbox"]{
+    margin-top: 7px;
+}
+
+#edit_number .header_nav .help_wrapper {
+    width: 490px;
+    margin: 10px auto 0;
+}
+
+#edit_number .header_nav .help_wrapper .find_area_code {
+    margin-left: 50px;
+}
+
+#edit_number .header_nav .help_wrapper .optional_field {
+    margin-left: 70px;
+    color: #999;
+}
+
+#edit_number .header_nav .area_code_wrapper {
+    color: #05ADDC;
+    font-size: 35px;
+    font-weight: bold;
+    line-height: 20px;
+    text-shadow: 1px 1px 1px #333333;
+    margin: auto;
+    width: 490px;
+}
+
+#edit_number .header_nav .area_code_wrapper .area_code_input {
+    border-radius: 5px;
+    color: #05ADDC;
+    font-size: 24px;
+    font-weight: bold;
+    height: 26px;
+    margin: 0 5px;
+    padding: 5px 0;
+    text-align: center;
+    vertical-align: middle;
+    width: 90px;
+}
+
+#edit_number .header_nav .area_code_wrapper .search_number {
+    background: url('images/btn_search.png') no-repeat;
+    width: 154px;
+    height: 45px;
+    display: inline-block;
+    margin: 0 0 -13px 25px;
+}
+
+#edit_number .header_nav .area_code_wrapper .search_number:hover {
+    background: url('images/btn_search_hover.png');
+}
+
+#edit_number .header_nav .area_code_wrapper input::-webkit-input-placeholder {
+    color: #CCCCCC !important;
+    font-size: 12px !important;
+}
+
+#edit_number .header_nav .area_code_wrapper input:-moz-placeholder {
+    color: #CCCCCC !important;
+    font-size: 12px !important;
+}
+
+#edit_number .content {
+    padding: 15px;
+}
+
+#edit_number .toggle_div {
+    padding: 30px 20px 10px;
+}
+
+#edit_number .split_div {
+    width: 100%;
+    margin-top: 20px;
+}
+
+#edit_number .split_div .left {
+    width: 47%;
+    padding-right: 3%;
+    float: left;
+}
+
+#edit_number .split_div .right {
+    width: 47%;
+    padding-left: 3%;
+    float: left;
+}
+
+#edit_number .content .stats {
+    border-top: 1px solid #ccc;
+    text-align: left;
+    margin: 20px 0 0 0;
+}
+
+#edit_number .content .stats .stats_left{
+    float: left;
+    width: 70%;
+    margin-top: 30px;
+}
+
+#edit_number .content .stats .stats_right{
+    float: left;
+    width: 30%;
+    margin-top: 30px;
+}
+
+#edit_number .content .stats .title_stats {
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#edit_number .content .stats .stat_number {
+    font-size: 26px;
+    color: #05addc;
+    font-weight: bold;
+}
+
+#edit_number #sdiddiv {
     display: block;
     text-align: center;
 }
 
-.foundDID {
-    text-align: center;
+#edit_number #foundDIDList {
+    border: 1px solid #888;
+    max-height: 206px;
+    overflow-y: scroll;
+    font-weight: bold;
 }
 
-.needCreditAdj {
-    height: 11px;
-    margin: 2px 0 0 !important;
-}
-
-#foundDIDList {
-    padding: 0 40px;
-}
-
-#addDIDForm {
-    overflow: auto;
-    max-width 20em;
-    max-height: 15em;
-    border: 1px solid #A6A6A6;
-}
-
-#addDIDForm .column:not(:last-child) {
+#edit_number #addDIDForm .column:not(:last-child) {
     border-right: 1px solid #A6A6A6;
 }
 
-#addDIDForm .column {
+#edit_number #addDIDForm .column {
     float: left;
     text-align: center;
     height: 25px;
     line-height: 25px;
+    padding: 0 10px;
 }
 
-#addDIDForm .column.first {
-    width: 100px;
+#edit_number #addDIDForm .column.first {
+    width: 50px;
 }
 
-#addDIDForm .column.second {
-    width: 70px;
-}
-
-#addDIDForm .row {
+#edit_number #addDIDForm .row_table {
     height: 25px
 }
 
-#addDIDForm .row:not(:last-child) {
+#edit_number #addDIDForm .row_table:not(:last-child) {
     border-bottom: 1px solid #A6A6A6;
 }
 
-#addDIDForm .row:nth-child(odd) {
+#edit_number #addDIDForm .row_table:nth-child(odd) {
     background-color: #eeeeee;
 }
 
-#addDIDForm .row:nth-child(even) {
+#edit_number #addDIDForm .row_table:nth-child(even) {
     background-color: #dddddd;
 }
 
-#addDIDForm .row .select_number {
-    margin-top: 5px;
+#edit_number #addDIDForm .row_table .select_number {
+    margin-top: 4px;
 }
 
 /* Port Number */
@@ -365,14 +472,4 @@
 /* CNAM POPUP */
 .cnam form{
     margin-bottom: 0;
-}
-
-/*ADDNUMBER POPUP*/
-
-.add_number input[type="checkbox"]{
-    margin: 7px 0 0 15px;
-}
-
-.add_number .helpertext{
-    text-align: center;
 }
