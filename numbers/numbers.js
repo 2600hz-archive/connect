@@ -817,12 +817,13 @@ winkstart.module('connect', 'numbers', {
             });
 
             popup = winkstart.dialog(popup_html, {
-                title: 'Edit e911 Location',
+                title: e911_data.phone_number ? 'Edit Location for ' + e911_data.phone_number : 'Edit 911 Location',
                 onClose: function() {
                     if(typeof callback == 'function') {
                         callback(e911_form_data);
                     }
-                }
+                },
+                width: '450px'
             });
         },
 
@@ -847,8 +848,7 @@ winkstart.module('connect', 'numbers', {
                     if(typeof callback == 'function') {
                         callback(cnam_form_data);
                     }
-                },
-                width: '430px'
+                }
             });
         },
 
@@ -856,22 +856,34 @@ winkstart.module('connect', 'numbers', {
             var THIS = this,
                 failover_form_data = {},
                 tmpl_data = {
+                    radio: (failover_data || {}).e164 ? 'number' : ((failover_data || {}).sip ? 'sip' : ''),
                     failover: (failover_data || {}).e164 || (failover_data || {}).sip || '',
                     phone_number: failover_data.phone_number || ''
                 },
                 popup_html = THIS.templates.failover_dialog.tmpl(tmpl_data),
                 popup,
-                result;
+                result,
+                popup_title = failover_data.phone_number ? 'Setup Failover for ' + failover_data.phone_number : 'Setup Failover';
+
+            $('.radio_block input[type="radio"]', popup_html).click(function() {
+                $('.radio_block input[type="text"]', popup_html).hide();
+
+                $(this).siblings('input[type="text"]').show('fast');
+
+                $('.header', popup_html).removeClass('number sip').addClass($('.radio_block input[type="radio"]:checked', popup_html).val());
+            });
 
             $('.submit_btn', popup_html).click(function(ev) {
                 ev.preventDefault();
 
-                failover_form_data = form2object('failover');
+                failover_form_data.raw_input = $('input[name="failover_type"]:checked', popup_html).val() === 'number' ? $('.failover_number', popup_html).val() : $('.failover_sip', popup_html).val();
+
+                console.log(failover_form_data.raw_input);
 
                 if(failover_form_data.raw_input.match(/^sip:/)) {
                     failover_form_data.sip = failover_form_data.raw_input;
                 }
-                else if(result = failover_form_data.raw_input.match(/^\+?1?([2-9]\d{9})$/)) {
+                else if(result = failover_form_data.raw_input.replace(/-|\(|\)|\s/g,'').match(/^\+?1?([2-9]\d{9})$/)) {
                     failover_form_data.e164 = '+1' + result[1];
                 }
                 else {
@@ -880,17 +892,24 @@ winkstart.module('connect', 'numbers', {
 
                 delete failover_form_data.raw_input;
 
+                if(failover_form_data.e164 || failover_form_data.sip) {
+                    callback(failover_form_data);
+                    popup.dialog('close');
+                }
+                else {
+                    winkstart.alert('Invalid Failover Number, please type it again.');
+                }
+            });
+
+            $('.remove_failover', popup_html).click(function(ev) {
+                ev.preventDefault();
+                callback({ e164: '', sip: '' });
                 popup.dialog('close');
             });
 
             popup = winkstart.dialog(popup_html, {
-                title: 'Edit failover',
-                onClose: function() {
-                    if(typeof callback == 'function') {
-                        callback(failover_form_data);
-                    }
-                },
-                width: '450px'
+                title: popup_title,
+                width: '640px'
             });
         },
 
