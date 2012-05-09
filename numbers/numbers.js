@@ -36,6 +36,18 @@ winkstart.module('connect', 'numbers', {
                 verb: 'PUT'
             },
 
+            'number.port': {
+                url: '{api_url}/accounts/{account_id}/phone_numbers/{phone_number}/port',
+                contentType: 'application/json',
+                verb: 'PUT'
+            },
+
+            /*'number.reserve': {
+                url: '{api_url}/accounts/{account_id}/phone_numbers/{phone_number}/reserve',
+                contentType: 'application/json',
+                verb: 'PUT'
+            },*/
+
             'number.activate': {
                 url: '{api_url}/accounts/{account_id}/phone_numbers/{phone_number}/activate',
                 contentType: 'application/json',
@@ -201,6 +213,28 @@ winkstart.module('connect', 'numbers', {
             var THIS = this;
 
             winkstart.request('number.update', {
+                    account_id: winkstart.apps['connect'].account_id,
+                    api_url: winkstart.apps['connect'].api_url,
+                    phone_number: encodeURIComponent(data.phone_number),
+                    data: data.options || {}
+                },
+                function(_data, status) {
+                    if(typeof success == 'function') {
+                        success(_data, status);
+                    }
+                },
+                function(_data, status) {
+                    if(typeof error == 'function') {
+                        error(_data, status);
+                    }
+                }
+            );
+        },
+
+        port_number: function(data, success, error) {
+            var THIS = this;
+
+            winkstart.request('number.port', {
                     account_id: winkstart.apps['connect'].account_id,
                     api_url: winkstart.apps['connect'].api_url,
                     phone_number: encodeURIComponent(data.phone_number),
@@ -1092,7 +1126,7 @@ winkstart.module('connect', 'numbers', {
                             phone_number: val
                         };
 
-                        THIS.create_number(number_data, function(_number_data) {
+                        THIS.port_number(number_data, function(_number_data) {
                             number_data.options = _number_data.data;
 
                             if('id' in number_data.options) {
