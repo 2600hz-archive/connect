@@ -4,12 +4,16 @@
     cursor: default;
 }
 
+.trunkstore_popup label{
+    color: #333;
+}
+/*
 .trunkstore_popup button {
     padding-top: 3px;
 }
 
 .trunkstore_popup input[type="text"]{
-	font-size: 12px;
+	/*font-size: 12px;
 	padding: 2px;
     border: 1px solid #999;
 	width: 200px;
@@ -20,6 +24,7 @@
     border: 1px solid #0be;
 }
 
+*/
 .trunkstore_popup a {
     text-decoration: underline;
     color: #0be;
@@ -30,12 +35,10 @@
 }
 
 .trunkstore_popup h2 {
-    padding: 10px 0px 5px 5px;
     color: #333333;
-    font-weight: bold;
-    font-size: 18px;
+    text-shadow: none;
 }
-
+/*
 .trunkstore_popup h3 {
 	font-size: 14.5px;
     font-weight: bold;
@@ -46,6 +49,7 @@
 	margin: 20px 0 20px 0;
 	text-align: center;
 }
+*/
 
 .trunkstore_popup .note_icon {
     background: url('../images/note.png') no-repeat;
@@ -139,6 +143,6 @@
     width: auto;
     text-align: right;
     margin-right: 10px;
-    line-height: 30px;
+    line-height: 24px;
     min-width: 80px;
 }

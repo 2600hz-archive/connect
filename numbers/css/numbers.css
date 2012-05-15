@@ -255,6 +255,10 @@
     font-size: 12px;
 }
 
+#port_number .wizard_nav .steps_text ul {
+    list-style: none;
+}
+
 #port_number .wizard_nav .steps_image .round_circle {
     width: 90px;
     height: 90px;
@@ -377,12 +381,12 @@
 
 #port_number .step_div.first .numbers_text {
     height: 160px;
-    width: 200px;
+    width: 210px;
 }
 
 #port_number .step_div.first .carrier_dropdown {
     margin-top: 5px;
-    width: 205px;
+    width: 220px;
     max-width: 235px;
 }
 
@@ -497,7 +501,7 @@
 }
 
 .trunkstore_popup.failover .radio_block {
-    padding: 20px;
+    padding: 0 20px 20px;
 }
 
 .trunkstore_popup.failover .radio_block .inline_field {
@@ -559,7 +563,7 @@
     font-weight: bold;
     font-size: 16px;
     line-height: 30px;
-    margin-left: 10px;
+    margin-left: 20px;
     text-align: left;
     padding-bottom: 10px;
 }
@@ -567,6 +571,10 @@
 .trunkstore_popup.e911 .e911_text .big_blue_text {
     color: #05addc;
     font-size: 32px;
+}
+
+.trunkstore_popup.e911 .submit_btn {
+    margin-top: 15px;
 }
 
 /* CNAM POPUP */

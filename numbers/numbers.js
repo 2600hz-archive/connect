@@ -857,7 +857,7 @@ winkstart.module('connect', 'numbers', {
                         callback(e911_form_data);
                     }
                 },
-                width: '450px'
+                width: '465px'
             });
         },
 

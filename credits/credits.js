@@ -130,7 +130,24 @@ winkstart.module('connect', 'credits', {
                 var popup_html = THIS.templates.credits_dialog.tmpl(data_tmpl),
                     popup;
 
-                $('ul.settings1', popup_html).tabs($('.pane > div', popup_html));
+                //$('ul.settings1', popup_html).tabs($('.pane > div', popup_html));
+
+                $('ul.settings1 > li', popup_html).click(function(item) {
+                    $('.pane_content', popup_html).hide();
+
+                    $('ul.settings1 > li', popup_html).removeClass('current');
+
+                    var tab_id = $(this).attr('id');
+
+                    if(tab_id  === 'flat_rate_link') {
+                        $('#flat_rate', popup_html).show();
+                    }
+                    else if(tab_id === 'per_minute_link') {
+                        $('#per_minute', popup_html).show();
+                    }
+
+                    $(this).addClass('current');
+                });
 
                 $('.purchase_credits', popup_html).click(function(ev) {
                     ev.preventDefault();
