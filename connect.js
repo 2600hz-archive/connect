@@ -43,6 +43,7 @@ winkstart.module('connect', 'connect', {
 
         THIS.whapp_auth(function() {
             winkstart.publish('whappnav.add', { 'name' : THIS.__module });
+            THIS.initialization_check();
         });
     },
     {
@@ -74,9 +75,11 @@ winkstart.module('connect', 'connect', {
 
             THIS.is_initialized = true;
 
-            winkstart.publish('subnav.show', THIS.__module);
+            //winkstart.publish('subnav.show', THIS.__module);
 
-            THIS.setup_page();
+            if(winkstart.apps['connect'].default){
+                THIS.setup_page();
+            }
         },
 
         activate: function() {
