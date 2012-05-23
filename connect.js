@@ -49,7 +49,8 @@ winkstart.module('connect', 'connect', {
     {
         whapp_vars: {
             billing_provider: 'braintree',
-            e911_provider: 'dash'
+            e911_provider: 'dash',
+            is_masqueradable: true
         },
 
         modules: {
